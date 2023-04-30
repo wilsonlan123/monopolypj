@@ -163,12 +163,12 @@ int choice = 0;
 bool test_number(int a,int choice,int numrange[]){ //function used to update numrange used in One In A Hundred
     if (choice>a){
         numrange[1] = choice;
-        cout << numrange[0] << " to "<< numrange[1]<<endl;
+        cout << "Guess a number between "<<numrange[0] << " to "<< numrange[1]<<endl;
         return true;
     }
     else if(choice<a){
         numrange[0] = choice;
-        cout << numrange[0] << " to "<< numrange[1]<<endl;
+        cout << "Guess a number between "<<numrange[0] << " to "<< numrange[1]<<endl;
         return true;}
     else {
         return false;
@@ -185,7 +185,7 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
     cout<<"In this game, you are going to keep guessing a number until you guessed the correct GOLDEN NUMBER"<<endl;
     cout<<"You will be given the range of the number before every guess, and the range will become smaller each time a guess is made."<<endl;
     cout<<"ALL THE BEST!"<<endl;
-    cout << numrange[0] << " to " << numrange[1] << endl;
+    cout << "Guess a number between "<< numrange[0] << " to " << numrange[1] << endl;
 
 
         while (true) {
