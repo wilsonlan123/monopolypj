@@ -435,19 +435,38 @@ void swap_money(int& player1_money, int& player2_money, int player1_num, int pla
 }
 
 int main() {
-    // Example usage of the function
     srand(time(nullptr)); // Seed the random number generator with current time
     
-    int player1_money = 500;
-    int player2_money = 1000;
+    // Example usage of the function within Monopoly
+    int num_players;
+    cout << "How many players are playing Monopoly? ";
+    cin >> num_players;
+    cout << endl;
     
-    cout << "Player 1 has $" << player1_money << "." << endl;
-    cout << "Player 2 has $" << player2_money << "." << endl;
+    int player_money[num_players];
+    for (int i = 0; i < num_players; i++) {
+        player_money[i] = 1500; // Set each player's starting money to $1500
+    }
     
-    if (rand() % 2 == 0) {
-        swap_money(player1_money, player2_money, 1, 2);
-    } else {
-        swap_money(player2_money, player1_money, 2, 1);
+    int current_player = 0; // Index of the current player
+    int current_position = 0; // Index of the current position on the board
+    
+    // Main game loop
+    while (true) {
+        // ... Code to move the current player to a new position on the board ...
+        
+        // Check if the current position triggers a money swap
+        if (current_position == 10) { // Example position that triggers a money swap
+            int other_player = rand() % num_players;
+            while (other_player == current_player) { // Make sure the other player is not the current player
+                other_player = rand() % num_players;
+            }
+            swap_money(player_money[current_player], player_money[other_player], current_player+1, other_player+1);
+        }
+        
+        // ... Code to handle other game actions ...
+        
+        current_player = (current_player + 1) % num_players; // Move to the next player's turn
     }
     
     return 0;
