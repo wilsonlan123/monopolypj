@@ -412,3 +412,43 @@ int main() {
     
     return 0;
 }
+
+//Here is a function for money swap.
+//When the user step on this grid, the amount of money he has will automatically swap with another person
+//Please help to link with the skeleton of the program 
+//variable inside can be adjusted.
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// Function to randomly swap the money of two players
+void swap_money(int& player1_money, int& player2_money, int player1_num, int player2_num) {
+    int temp = player1_money;
+    player1_money = player2_money;
+    player2_money = temp;
+    
+    cout << "Player " << player1_num << " now has $" << player1_money << "." << endl;
+    cout << "Player " << player2_num << " now has $" << player2_money << "." << endl;
+    cout << "The two players have swapped money!" << endl;
+}
+
+int main() {
+    // Example usage of the function
+    srand(time(nullptr)); // Seed the random number generator with current time
+    
+    int player1_money = 500;
+    int player2_money = 1000;
+    
+    cout << "Player 1 has $" << player1_money << "." << endl;
+    cout << "Player 2 has $" << player2_money << "." << endl;
+    
+    if (rand() % 2 == 0) {
+        swap_money(player1_money, player2_money, 1, 2);
+    } else {
+        swap_money(player2_money, player1_money, 2, 1);
+    }
+    
+    return 0;
+}
