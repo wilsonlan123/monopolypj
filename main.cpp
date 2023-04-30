@@ -179,7 +179,7 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
     bool p1turn = true;
     int choice = 0;
     string players[] = {player1,player2};
-    int a =  rand() % 100; // this is the bomb number
+    int a =  rand() % 100; // this is the winning number
     int numrange[] = {0,100};
     cout<<"Welcome to Mini Game: <One in a hundred>"<<endl;
     cout<<"In this game, you are going to keep guessing a number until you guessed the correct GOLDEN NUMBER"<<endl;
