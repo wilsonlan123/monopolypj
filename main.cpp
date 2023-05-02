@@ -4,6 +4,7 @@
 #include <map>
 #include <random>
 #include <thread>
+#include "Minigame.h"
 using namespace std;
 
 void PvPcheck(string &PvP, int &PvPcorrectness){
