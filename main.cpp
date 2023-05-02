@@ -75,6 +75,7 @@ int choice = 0;
     cout<<endl;
     cout<<"Player with 0 dice left will win the game"<<endl;
     cout<<"GAME BEGINS NOW!"<<endl;
+    cout<<"Lets go!"<<endl;
     cout<<endl;
    
     vector<int> p1lst;
@@ -145,15 +146,15 @@ int choice = 0;
     if (p1dice <= 0) {
         cout << "Winner is " << player1 << " ! Congratulations!\n";
         cout << "You win 500m!"<<endl;
-        //Characters[player1] += 500;
-        //Characters[player2] -= 500;
+        Characters[player1] += 500;
+        Characters[player2] -= 500;
         break;
     }
     else if (p2dice <= 0) {
         cout << "Winner is " << player2 << " ! Congratulations!\n";
         cout << "You win 500m!"<<endl;
-        //Characters[player2] += 500;
-        //Characters[player1] -= 500;
+        Characters[player2] += 500;
+        Characters[player1] -= 500;
         break;
     }
     return ;
@@ -184,7 +185,9 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
     cout<<"Welcome to Mini Game: <One in a hundred>"<<endl;
     cout<<"In this game, you are going to keep guessing a number until you guessed the correct GOLDEN NUMBER"<<endl;
     cout<<"You will be given the range of the number before every guess, and the range will become smaller each time a guess is made."<<endl;
+    cout<<"Winner will be rewarded 500m!"<<endl;
     cout<<"ALL THE BEST!"<<endl;
+    cout<<"Let's go!"<<endl;
     cout << "Guess a number between "<< numrange[0] << " to " << numrange[1] << endl;
 
 
