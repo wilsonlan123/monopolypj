@@ -2,7 +2,8 @@
 #include <cctype>
 #include <string>
 #include <map>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <thread>
 #include "Minigame.h"
 using namespace std;
@@ -45,9 +46,19 @@ void PlayerNocheck(int &PlayerNo, int &PlayerNocorrectness){
     }
 }
 
+int Rolladice (int numberofplayers,int &Rollcount){
+    srand(time(0));
+    int dice = rand() % 6 + 1;
+    if (Rollcount % numberofplayers == 0){
+        //play a minigame
+    }
+    Rollcount += 1;
+    return dice;
+}
 
 int main(){
     int numberofplayers = 0;
+    int Rollcount = 0;
     cout << "---Welcome to monopoly! ( special edition )---" << endl;
     cout << "-----------------------------Settings-----------------------------" << endl;
     int PvPcorrectness = 0;
