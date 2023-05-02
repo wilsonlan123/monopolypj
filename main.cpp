@@ -47,6 +47,7 @@ void PlayerNocheck(int &PlayerNo, int &PlayerNocorrectness){
 
 
 int main(){
+    int numberofplayers = 0;
     cout << "---Welcome to monopoly! ( special edition )---" << endl;
     cout << "-----------------------------Settings-----------------------------" << endl;
     int PvPcorrectness = 0;
@@ -146,15 +147,18 @@ int main(){
     string Symbols[2][4] = {{"○","△","□","⬡"}, {"●","▲","■","⬢"}};
     map<string, int> Characters;
     if (PvP == "yes"){
+        numberofplayers += PlayerNo;
         for (int i = 1; i <= PlayerNo; i++){
             Characters["Player" + to_string(i)] = 1500;
         }
         if (PvE == "yes"){
+            numberofplayers += BotNo;
             for (int j = 1; j <= BotNo; j++){
                 Characters["Bot" + to_string(j)] = 1500;
             }
         }
     } else{
+        numberofplayers = numberofplayers + 1 +BotNo;
         Characters["Player"] = 1500;
         for (int a = 1; a <= BotNo; a++) {
             Characters["Bot" + to_string(a)] = 1500;
