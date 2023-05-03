@@ -30,10 +30,9 @@ square p[14] = { { "Start", -500, "     ", "     "},
 		{ "$50M", 50, "     ", "     "},
 		{ "$100M", 100, "     ", "     "}};
 		
-//below is a suggested structure to record the data of the players/bots to replace the current map variable (Oscar)
+
 struct playerdata{
 	string name;
-	int number;
 	char pawn;
 	int BankBalance;
 	int position;
@@ -110,12 +109,29 @@ void PrintBoard() {
 	cout << "-------   -------   -------   -------   -------" << endl << endl;
 }
 
-void PrintBalance(map<string, int> Characters) {
-	  map<string, int>::iterator it = Characters.begin();
-	  while (it != Characters.end()){
-    		cout  << it->first << " Bank Balance = "  << it->second << endl;
-    		++it;
-	}
+void PrintBalance(playerdata Character[4], int n) {
+	  for (int i = 0; i < n; i++) {
+	  	cout << Character[i].name << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
+	  }
+}
+
+string PawnSelect(int n, string &Symbols, int i) {
+	     int temp;
+	     string selection;
+	     cout << "Player " << n <<  " select your pawn:" << endl;
+             for (int k = 1; k <= Symbols.length(); k++){
+                  cout << k << ":" << Symbols[k-1] << "   ";
+             }
+             cout << endl;
+             cin >> temp;
+             while (temp > Symbols.length() || temp < 1) {
+                  cout << "Invalid input" << endl;
+                  cin >> temp;
+             }
+	     selection = Symbols[temp-1];
+	     Symbols.erase(temp-1,1);
+	     p[0].visitors.replace(i,1,selection);
+	     return selection;
 }
 
 int main(){
@@ -217,42 +233,39 @@ int main(){
             }
         }
     }
-    string Symbols[2][4] = {{"○","△","□","⬡"}, {"●","▲","■","⬢"}};
+    string Symbols = "○△□⬡●▲■⬢";
     int temp;
+    int charactercount = 0;
     if (PvP == "yes"){
         numberofplayers += PlayerNo;
         for (int i = 1; i <= PlayerNo; i++){
-            cout << "Player " << i <<  " select your pawn:" << endl;
-	    for (int k = 1; k <= Symbols.length(); k++){
-                 cout << k << ":" << Symbols[k-1] << "   ";
-            }
-            cout << endl;
-            cin >> temp;
-	    while (temp > Symbols.length() || temp < 1) {
-                 cout << "Invalid input" << endl;
-		 cin >> temp;
-	    }
-	    Characters["Player" + to_string(i) + " " + Symbols[temp-1]] = 1500;
-	    Symbols.erase(temp-1,1);
+	    Character[charactercount] = {"Player" + to_string(i), PawnSelect(i, Symbols, charactercount) , 1500, 0};
+	    charactercount += 1;
 	}
         if (PvE == "yes"){
             numberofplayers += BotNo;
             for (int j = 1; j <= BotNo; j++){
 	    	temp = rand() % Symbols.length() + 1;
-                Characters["Bot" + to_string(j) + " " + Symbols[temp-1]] = 1500;
+                Character[charactercount] = {"Bot" + to_string(j), Symbols.substr(temp-1,1), 1500, 0};
+		p[0].visitors.replace(charactercount,1,Symbols.substr(temp-1,1));
+		charactercount += 1;
 		Symbols.erase(temp-1,1);
             }
         }
     } else{
         numberofplayers = numberofplayers + 1 +BotNo;
-        Characters["Player"] = 1500;
+        Character[charactercount] = {"Player1", PawnSelect(1, Symbols, charactercount) , 1500, 0};
+	charactercount +=1;
         for (int a = 1; a <= BotNo; a++) {
 	    temp = rand() % Symbols.length() + 1;
-            Characters["Bot" + to_string(a) + " " + Symbols[temp-1]] = 1500;
+            Character[charactercount] = {"Bot" + to_string(a), Symbols.substr(temp-1,1), 1500, 0};
+            p[0].visitors.replace(charactercount,1,Symbols.substr(temp-1,1));
+	    charactercount += 1;
 	    Symbols.erase(temp-1,1);
         }
     }
     cout << "------------------------------------------------------------------" << endl;
 	PrintBoard();
-	PrintBalance(Characters);
+	PrintBalance(Character, charactercount);
 }
+
