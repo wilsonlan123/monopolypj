@@ -8,6 +8,28 @@
 #include "Minigame.h"
 using namespace std;
 
+struct square{
+	string title;
+	int price;
+	string owner;
+	string visitors;
+};
+
+square p[14] = { { "Start", -500, "     ", "     "},
+		{ "$250M", 250, "     ", "     "},
+		{ "$300M", 300, "     ", "     "},
+		{ "Empty", 0, "     ", "     "},
+		{ "$250M", 250, "     ", "     "},
+		{ "$250M", 250, "     ", "     "},
+		{ "Empty", 0, "     ", "     "},
+		{ "$500M", 500, "     ", "     "},
+		{ "$150M", 150, "     ", "     "},
+		{ "$150M", 150, "     ", "     "},
+		{ "Empty", 0, "     ", "     "},
+		{ "$100M", 100, "     ", "     "},
+		{ "$50M", 50, "     ", "     "},
+		{ "$100M", 100, "     ", "     "}};
+
 void PvPcheck(string &PvP, int &PvPcorrectness){
     cout << "Multiplayers?\n( yes / no ): ";
     cin >> PvP;
@@ -55,6 +77,30 @@ int Rolladice (int numberofplayers,int &Rollcount){
     Rollcount += 1;
     return dice;
 }
+
+void PrintBoard() {
+    cout << "-------   -------   -------   -------   -------" << endl;
+	cout << "|" << p[7].title << "|   |" << p[8].title << "|   |" << p[9].title << "|   |" << p[10].title << "|   |" << p[11].title << "|" << endl;
+	cout << "|" << p[7].owner << "|   |" << p[8].owner << "|   |" << p[9].owner << "|   |" << p[10].owner << "|   |" << p[11].owner << "|" << endl;
+	cout << "|" << p[7].visitors << "|   |" << p[8].visitors << "|   |" << p[9].visitors << "|   |" << p[10].visitors << "|   |" << p[11].visitors << "|" << endl;
+	cout << "-------   -------   -------   -------   -------" << endl << endl;
+	cout <<"-------                                 -------"  << endl;
+	cout << "|" << p[6].title << "|                                 |" << p[12].title << "|" << endl;
+	cout << "|" << p[6].owner << "|                                 |" << p[12].owner << "|" << endl;
+	cout << "|" << p[6].visitors << "|                                 |" << p[12].visitors << "|" << endl;
+	cout <<"-------                                 -------"  << endl << endl;
+	cout <<"-------                                 -------"  << endl;
+	cout << "|" << p[5].title << "|                                 |" << p[13].title << "|" << endl;
+	cout << "|" << p[5].owner << "|                                 |" << p[13].owner << "|" << endl;
+	cout << "|" << p[5].visitors << "|                                 |" << p[13].visitors << "|" << endl;
+	cout <<"-------                                 -------"  << endl << endl;
+	cout << "-------   -------   -------   -------   -------" << endl;
+	cout << "|" << p[4].title << "|   |" << p[3].title << "|   |" << p[2].title << "|   |" << p[1].title << "|   |" << p[0].title << "|" << endl;
+	cout << "|" << p[4].owner << "|   |" << p[3].owner << "|   |" << p[2].owner << "|   |" << p[1].owner << "|   |" << p[0].owner << "|" << "   <----- Get $500M" << endl;
+	cout << "|" << p[4].visitors << "|   |" << p[3].visitors << "|   |" << p[2].visitors << "|   |" << p[1].visitors << "|   |" << p[0].visitors << "|" << "    each time passing Start" << endl;
+	cout << "-------   -------   -------   -------   -------" << endl << endl;
+}
+
 
 int main(){
     int numberofplayers = 0;
