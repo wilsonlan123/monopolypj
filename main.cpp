@@ -101,6 +101,13 @@ void PrintBoard() {
 	cout << "-------   -------   -------   -------   -------" << endl << endl;
 }
 
+void PrintBalance(map<string, int> Characters) {
+	  map<string, int>::iterator it = Characters.begin();
+	  while (it != Characters.end()){
+    		cout  << it->first << " Bank Balance = "  << it->second << endl;
+    		++it;
+	}
+}
 
 int main(){
     int numberofplayers = 0;
@@ -202,25 +209,41 @@ int main(){
         }
     }
     string Symbols[2][4] = {{"○","△","□","⬡"}, {"●","▲","■","⬢"}};
-    map<string, int> Characters;
+    int temp;
     if (PvP == "yes"){
         numberofplayers += PlayerNo;
         for (int i = 1; i <= PlayerNo; i++){
-            Characters["Player" + to_string(i)] = 1500;
-        }
+            cout << "Player " << i <<  " select your pawn:" << endl;
+	    for (int k = 1; k <= Symbols.length(); k++){
+                 cout << k << ":" << Symbols[k-1] << "   ";
+            }
+            cout << endl;
+            cin >> temp;
+	    while (temp > Symbols.length() || temp < 1) {
+                 cout << "Invalid input" << endl;
+		 cin >> temp;
+	    }
+	    Characters["Player" + to_string(i) + " " + Symbols[temp-1]] = 1500;
+	    Symbols.erase(temp-1,1);
+	}
         if (PvE == "yes"){
             numberofplayers += BotNo;
             for (int j = 1; j <= BotNo; j++){
-                Characters["Bot" + to_string(j)] = 1500;
+	    	temp = rand() % Symbols.length() + 1;
+                Characters["Bot" + to_string(j) + " " + Symbols[temp-1]] = 1500;
+		Symbols.erase(temp-1,1);
             }
         }
     } else{
         numberofplayers = numberofplayers + 1 +BotNo;
         Characters["Player"] = 1500;
         for (int a = 1; a <= BotNo; a++) {
-            Characters["Bot" + to_string(a)] = 1500;
+	    temp = rand() % Symbols.length() + 1;
+            Characters["Bot" + to_string(a) + " " + Symbols[temp-1]] = 1500;
+	    Symbols.erase(temp-1,1);
         }
     }
     cout << "------------------------------------------------------------------" << endl;
+	PrintBoard();
+	PrintBalance(Characters);
 }
-
