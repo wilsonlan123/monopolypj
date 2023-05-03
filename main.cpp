@@ -29,6 +29,15 @@ square p[14] = { { "Start", -500, "     ", "     "},
 		{ "$100M", 100, "     ", "     "},
 		{ "$50M", 50, "     ", "     "},
 		{ "$100M", 100, "     ", "     "}};
+		
+//below is a suggested structure to record the data of the players/bots to replace the current map variable (Oscar)
+struct playerdata{
+	string name;
+	int number;
+	char pawn;
+	int BankBalance;
+	int position;
+};
 
 void PvPcheck(string &PvP, int &PvPcorrectness){
     cout << "Multiplayers?\n( yes / no ): ";
