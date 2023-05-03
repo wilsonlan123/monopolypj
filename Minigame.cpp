@@ -601,7 +601,7 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
    Characters[players[(turn)%2]] -= 500 
    }
 
-#include<iostream>      // drawnum game earn by how large os tje ranking of score 
+#include<iostream>      // drawnum game earn by how large they random 
 #include<list>
 #include<vector>
 #include<random>
@@ -642,7 +642,7 @@ int main() {
 #include<string>
 
 using namespace std;
-vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "CLICK","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
+vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
 vector<char> hmguessbank{'B','C','D','E','A','K','M'};
 map<string, int>hmplayer_scoremap;
 // we should just let the bot to guess from 20 words
@@ -805,9 +805,7 @@ int main() {
 	cout << "-----------------------------------------------------------------------------------------" << endl;
 	cout << "Bot 4's turn! " << endl;
 	bhangman();
-	cout << "-----------------------------------------------------------------------------------------" << endl;
-	cout << "Bot 5's turn! " << endl;
-	bhangman();
+
 
 }
 
