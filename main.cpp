@@ -111,7 +111,7 @@ void PrintBoard() {
 
 void PrintBalance(playerdata Character[4], int n) {
 	  for (int i = 0; i < n; i++) {
-	  	cout << Character[i].name << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
+	  	cout << Character[i].name << " " << Character[i].pawn << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
 	  }
 }
 
