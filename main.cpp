@@ -11,6 +11,7 @@ using namespace std;
 struct square{
 	string title;
 	int price;
+	int rent;
 	string owner;
 	string visitors;
 };
