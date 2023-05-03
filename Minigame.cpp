@@ -601,3 +601,213 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
    Characters[players[(turn)%2]] -= 500 
    }
 
+#include<iostream>      // drawnum game earn by how large os tje ranking of score 
+#include<list>
+#include<vector>
+#include<random>
+#include<map>
+#include<string>
+using namespace std;
+
+vector<int> dgnumbank;
+map<string, int>player_scoremap;
+void dgdrawnum(string i) {
+	cout << "Time to draw! " << endl;
+	int dgrandom = rand() % numbank.size();
+
+	int score = numbank[dgrandom];
+	cout << "The drawn number is " << numbank[dgrandom] << endl;
+	player_scoremap.insert({ i,score });
+}
+
+
+int main() {
+	cout << "The drawing number game. The larger number you can draw, the more you can get! " << endl;
+	for (int i = 0; i < 500; i++) {
+		dgnumbank.push_back(i);
+	}
+	for (int i = 0; i < 6; i++) {
+		string temp = to_string(i);
+		dgdrawnum(temp);
+	}
+	return 0;
+
+}
+
+#include<iostream> //hangman game 
+#include<list>
+#include<vector>
+#include<random>
+#include<map>
+#include<string>
+
+using namespace std;
+vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "CLICK","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
+vector<char> hmguessbank{'B','C','D','E','A','K','M'};
+map<string, int>hmplayer_scoremap;
+// we should just let the bot to guess from 20 words
+int chances = 8;
+vector<char> hmdisplay{ '_','_','_','_','_'};//list of display 
+vector<char> hmanslist;	// list of ans 
+bool hmwin = false;
+
+int hmfloop(vector<char> w) {
+	if (hmwin == true) {
+		for (auto it = w.begin(); it != w.end(); ++it) {
+			cout << *it;
+			
+		}
+		return 0;
+	}
+	cout << "Current: ";
+	for (auto it = w.begin(); it != w.end();++it) {
+		cout << *it;
+	}
+	cout << endl;
+	return 1;
+}
+vector<char> hmveclean() {
+	hmdisplay.clear();
+	for (int i =0; i<5;i++){
+		hmdisplay.push_back('_');
+	}
+	return hmdisplay;
+}
+char toUppercase(char a) {
+	if (a >= 'a' && a <= 'z') {
+		a -= 32;
+		return a;
+	}
+	if (a >= 'A' && a <= 'Z') {
+		return a;
+	}
+}
+
+bool hmcheck() {
+	bool flag = true;
+	for (int i = 0; i < 5; i++) {
+		if (hmdisplay[i] != hmanslist[i]) {
+			flag = false;
+			return flag;
+		}
+	}
+	hmwin = true;
+	return flag;
+}
+bool hmguess(vector<char> ans,char input){ // why dont we replace the display directly?		// guessiing a letter is easier
+	bool hmflag = false;
+	list<char> hmguesslist;
+	for (int i = 0; i < 5; i++) {
+		char temp = ans[i];
+		if (input ==ans[i] ) {
+			hmdisplay[i] = ans[i];
+			hmflag = true;
+			if (hmcheck() == true) {
+				cout << "You win. " << endl;
+				cout << "The answer is ";
+				hmfloop(hmdisplay);
+				cout << endl;
+				return hmflag;
+			}
+			//else if(check() == true && chances == 0)  {
+			//	cout << "You lose. ";
+			//	cout << "The answer is ";
+			//	floop(display);
+			//	cout << endl;
+			//}
+			break;
+		}
+	}
+
+	hmfloop(hmdisplay);
+	if (hmflag == false) {
+		cout << "Incorrect" << endl;
+		chances -=1;
+		cout << "You have " << chances << " chances left. " << endl;
+	}
+	return hmflag;
+}
+void phangman() { // hangman for human
+	hmveclean();
+	chances = 8;
+	hmwin = false;
+	int random = rand() % hmwordbank.size();
+	string ans = hmwordbank[random];
+	hmanslist.clear();
+	hmfloop(hmdisplay);
+	for (int i = 0; i < 5; i++) {
+		char temp = ans[i];
+		hmanslist.push_back(temp);
+	}
+	while (chances > 0 && hmwin == false) {
+		cout << "Please guess a letter: ";
+		char input;
+		cin >> input;
+		input = toUppercase(input);
+		hmguess(hmanslist,input);
+	}
+	//player_scoremap[] = chances; // put player into this function then include its value into here
+	
+
+
+}
+void bhangman() { // hangman for bot 
+	chances = 8;
+	hmwin = false;
+	int hmrandom = rand() % hmwordbank.size();
+	hmanslist.clear();
+	string ans = hmwordbank[hmrandom];
+	hmwin = false;
+	hmveclean();
+	hmfloop(hmdisplay);
+	cout << "The answer is " << ans << endl;
+	for (int i = 0; i < 5; i++) {
+		char temp = ans[i];
+		hmanslist.push_back(temp);
+	}
+	int hmrandom2 = rand() % hmwordbank.size();
+	string randguess = hmwordbank[hmrandom2];
+	for (int i = 0; i < 5; i++) { //ok
+		char temp = randguess[i];
+		hmguessbank.push_back(temp);
+	}
+	while (chances > 0 && hmwin == false) {
+		cout << "Please guess a letter: ";
+		char input;
+		int hmrandom3 = rand() % hmguessbank.size();
+		input = hmguessbank[hmrandom3];
+		input = toUppercase(input);		
+		cout << input << endl;
+		hmguess(hmanslist, input);
+
+	}
+	if (hmwin == false && chances == 0) {
+		cout << "You lose " << endl;
+	}
+}
+
+
+int main() {
+	int playernum = 4; // number of players 
+	cout << "Wordle time! " << endl;
+	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "Player 1's turn! " << endl;
+	phangman();
+	cout << "-----------------------------------------------------------------------------------------" << endl; 
+	cout << "Bot 1's turn! " << endl;
+	bhangman();
+	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "Bot 2's turn! " << endl;
+	bhangman();
+	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "Bot 3's turn! " << endl;
+	bhangman();
+	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "Bot 4's turn! " << endl;
+	bhangman();
+	cout << "-----------------------------------------------------------------------------------------" << endl;
+	cout << "Bot 5's turn! " << endl;
+	bhangman();
+
+}
+
