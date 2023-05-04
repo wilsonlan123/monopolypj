@@ -115,15 +115,15 @@ int choice = 0;
     if (p1dice <= 0) {
         cout << "Winner is " << player1 << " ! Congratulations!\n";
         cout << "You win 500m!"<<endl;
-        Characters[player1] += 500;
-        Characters[player2] -= 500;
+        //Characters[player1] += 500;
+        //Characters[player2] -= 500;
         break;
     }
     else if (p2dice <= 0) {
         cout << "Winner is " << player2 << " ! Congratulations!\n";
         cout << "You win 500m!"<<endl;
-        Characters[player2] += 500;
-        Characters[player1] -= 500;
+        //Characters[player2] += 500;
+        //Characters[player1] -= 500;
         break;
     }
     return ;
