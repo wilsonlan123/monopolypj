@@ -4,8 +4,9 @@
 #include <map>
 #include <cstdlib>
 #include <ctime>
+#include <chrono>
 #include <thread>
-#include "Minigame.h"
+#include <limits>
 using namespace std;
 
 struct square{
@@ -13,30 +14,35 @@ struct square{
 	int price;
 	string owner;
 	string visitors;
+	int OwnerNum;
 };
+
 
 square p[14] = { { "Start", -500, "     ", "     "},
 		{ "$250M", 250, "     ", "     "},
 		{ "$300M", 300, "     ", "     "},
-		{ "Empty", 0, "     ", "     "},
+		{ "Mini ", 0, "Game ", "     "},
 		{ "$250M", 250, "     ", "     "},
 		{ "$250M", 250, "     ", "     "},
-		{ "Empty", 0, "     ", "     "},
+		{ "Mini ", 0, "Game ", "     "},
 		{ "$500M", 500, "     ", "     "},
 		{ "$150M", 150, "     ", "     "},
 		{ "$150M", 150, "     ", "     "},
-		{ "Empty", 0, "     ", "     "},
+		{ "Mini ", 0, "Game ", "     "},
 		{ "$100M", 100, "     ", "     "},
-		{ "$50M", 50, "     ", "     "},
+		{ "$50M ", 50, "     ", "     "},
 		{ "$100M", 100, "     ", "     "}};
 		
 
 struct playerdata{
 	string name;
-	char pawn;
+	string pawn;
 	int BankBalance;
 	int position;
+	bool NPC;
 };
+
+
 
 playerdata Character[4];
 
@@ -123,8 +129,10 @@ string PawnSelect(int n, string &Symbols, int i) {
              }
              cout << endl;
              cin >> temp;
-             while (temp > Symbols.length() || temp < 1) {
-                  cout << "Invalid input" << endl;
+             while (temp > Symbols.length() || temp < 1){
+                  cin.clear();
+		  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+		  cout << "Invalid input" << endl;
                   cin >> temp;
              }
 	     selection = Symbols[temp-1];
@@ -132,6 +140,7 @@ string PawnSelect(int n, string &Symbols, int i) {
 	     p[0].visitors.replace(i,1,selection);
 	     return selection;
 }
+
 
 bool gameover(int charactercount) {
 	if (charactercount == 1) {
@@ -153,7 +162,55 @@ bool gameover(int charactercount) {
 
 
 void turnsequence(){
-	//insert code to run regular turn sequence;
+	int roll = Rolladice();
+	string temp;
+	if (Character[Rollcount].NPC == false){
+		cout << Character[Rollcount].name << "'s turn! Press any key then ENTER to roll the dice!";
+		cin >> temp;
+	}
+	else {
+		cout << Character[Rollcount].name << "'s turn!" << endl;
+		this_thread::sleep_for(2000ms);
+	}
+	cout << Character[Rollcount].name << " rolled a " << roll << endl;
+	this_thread::sleep_for(2000ms);
+	p[Character[Rollcount].position].visitors.replace(Rollcount, 1, " ");
+	Character[Rollcount].position = (Character[Rollcount].position + roll) % 14;
+	p[Character[Rollcount].position].visitors.replace(Rollcount, 1, Character[Rollcount].pawn);
+	PrintBoard();
+	if (p[Character[Rollcount].position].title == "Game "){
+		//MINIGAME SEQUENCE
+		return;
+	}
+	else if (p[Character[Rollcount].position].title == "Start"){
+		return;
+	}else {
+		if (p[Character[Rollcount].position].owner == "     "){
+			if (Character[Rollcount].NPC == false){
+				cout << Character[Rollcount].name << " landed on a free property!\nWould you like to purchase? (Yes/No) ";
+				string temp;
+				cin >> temp;
+				while (temp != "Yes" && temp != "No"){
+					cout << endl << "Invalid input" << endl;
+					cin >> temp;
+				}
+				if (temp == "Yes"){
+					if (Character[Rollcount].BankBalance - p[Character[Rollcount].position].price < 0){
+						cout << "Oh no! You can't afford this property! :(" << endl;
+						return;
+					}else{
+						p[Character[Rollcount].position].owner = " " + Character[Rollcount].name + "  ";
+					 	p[Character[Rollcount].position].OwnerNum = Rollcount;
+					 	p[Character[Rollcount].position].title = "Owned";
+					 	Character[Rollcount].BankBalance -= p[Character[Rollcount].position].price;
+						cout << "You have $" << Character[Rollcount].BankBalance << "M remaining" << endl;
+						return;
+					}
+				}
+			}
+		}
+	}
+
 }
 
 int main(){
@@ -285,10 +342,14 @@ int main(){
     cout << "------------------------------------------------------------------" << endl;
 	PrintBoard();
 	PrintBalance(numberofplayers);
+	int activeplayers = numberofplayers;
 	bool GAMEOVER = false;
 	while (GAMEOVER == false){
-		turnsequence();
-		GAMEOVER = gameover(numberofplayers);
+		turnsequence(activeplayers, Rollcount);
+		GAMEOVER = gameover(activeplayers);
+		Rollcount = (Rollcount + 1) % activeplayers;
 	}
+
 }
+
 
