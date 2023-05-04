@@ -134,6 +134,29 @@ string PawnSelect(int n, string &Symbols, int i) {
 	     return selection;
 }
 
+bool gameover(int charactercount) {
+	if (charactercount == 1) {
+		return true;
+	}
+	cout << "End Game? (Yes/No): ";
+	string ans;
+	cin >> ans;
+	if (ans == "Yes" || ans == "yes"){
+		return true;
+	} else if (ans == "No" || ans == "no"){ 
+		return false;
+	} else {
+		cout << "Invalid input" << endl;
+		return gameover(charactercount);
+	}
+	
+}
+
+
+void turnsequence(){
+	//insert code to run regular turn sequence;
+}
+
 int main(){
     int numberofplayers = 0;
     int Rollcount = 0;
@@ -235,37 +258,41 @@ int main(){
     }
     string Symbols = "○△□⬡●▲■⬢";
     int temp;
-    int charactercount = 0;
     if (PvP == "yes"){
-        numberofplayers += PlayerNo;
+        //numberofplayers += PlayerNo;
         for (int i = 1; i <= PlayerNo; i++){
-	    Character[charactercount] = {"Player" + to_string(i), PawnSelect(i, Symbols, charactercount) , 1500, 0};
-	    charactercount += 1;
+	    Character[numberofplayers] = {"Player" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , 1500, 0};
+	    numberofplayers += 1;
 	}
         if (PvE == "yes"){
-            numberofplayers += BotNo;
+            //numberofplayers += BotNo;
             for (int j = 1; j <= BotNo; j++){
 	    	temp = rand() % Symbols.length() + 1;
-                Character[charactercount] = {"Bot" + to_string(j), Symbols.substr(temp-1,1), 1500, 0};
-		p[0].visitors.replace(charactercount,1,Symbols.substr(temp-1,1));
-		charactercount += 1;
+                Character[numberofplayers] = {"Bot" + to_string(j), Symbols.substr(temp-1,1), 1500, 0};
+		p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp-1,1));
+		numberofplayers += 1;
 		Symbols.erase(temp-1,1);
             }
         }
     } else{
-        numberofplayers = numberofplayers + 1 +BotNo;
-        Character[charactercount] = {"Player1", PawnSelect(1, Symbols, charactercount) , 1500, 0};
-	charactercount +=1;
+        //numberofplayers = numberofplayers + 1 +BotNo;
+        Character[numberofplayers] = {"Player1", PawnSelect(1, Symbols, charactercount) , 1500, 0};
+	numberofplayers +=1;
         for (int a = 1; a <= BotNo; a++) {
 	    temp = rand() % Symbols.length() + 1;
-            Character[charactercount] = {"Bot" + to_string(a), Symbols.substr(temp-1,1), 1500, 0};
-            p[0].visitors.replace(charactercount,1,Symbols.substr(temp-1,1));
-	    charactercount += 1;
+            Character[numberofplayers] = {"Bot" + to_string(a), Symbols.substr(temp-1,1), 1500, 0};
+            p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp-1,1));
+	    numberofplayers += 1;
 	    Symbols.erase(temp-1,1);
         }
     }
     cout << "------------------------------------------------------------------" << endl;
 	PrintBoard();
-	PrintBalance(Character, charactercount);
+	PrintBalance(Character, numberofplayers);
+	bool GAMEOVER = false;
+	while (GAMEOVER == false){
+		turnsequence();
+		GAMEOVER = gameover(numberofplayers);
+	}
 }
 
