@@ -258,6 +258,7 @@ int main(){
     }
     string Symbols = "○△□⬡●▲■⬢";
     int temp;
+    playerdata Character[BotNo + PlayerNo];
     if (PvP == "yes"){
         //numberofplayers += PlayerNo;
         for (int i = 1; i <= PlayerNo; i++){
