@@ -621,7 +621,7 @@ void dgdrawnum(string i) {
 }
 
 
-int main() {
+int drawingnumber() {
 	cout << "The drawing number game. The larger number you can draw, the more you can get! " << endl;
 	for (int i = 0; i < 500; i++) {
 		dgnumbank.push_back(i);
@@ -645,13 +645,13 @@ using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
 vector<char> hmguessbank{'B','C','D','E','A','K','M'};
 map<string, int>hmplayer_scoremap;
-// we should just let the bot to guess from 20 words
-int chances = 8;
+
+int chances = 8; // maybe we can lower it 
 vector<char> hmdisplay{ '_','_','_','_','_'};//list of display 
 vector<char> hmanslist;	// list of ans 
 bool hmwin = false;
 
-int hmfloop(vector<char> w) {
+int hmfloop(vector<char> w) { // for loop for vectors to print out the guess or current or ans 
 	if (hmwin == true) {
 		for (auto it = w.begin(); it != w.end(); ++it) {
 			cout << *it;
@@ -666,14 +666,14 @@ int hmfloop(vector<char> w) {
 	cout << endl;
 	return 1;
 }
-vector<char> hmveclean() {
+vector<char> hmveclean() { //cleaning the vectors 
 	hmdisplay.clear();
 	for (int i =0; i<5;i++){
 		hmdisplay.push_back('_');
 	}
 	return hmdisplay;
 }
-char toUppercase(char a) {
+char toUppercase(char a) { // change a char into 
 	if (a >= 'a' && a <= 'z') {
 		a -= 32;
 		return a;
@@ -694,7 +694,7 @@ bool hmcheck() {
 	hmwin = true;
 	return flag;
 }
-bool hmguess(vector<char> ans,char input){ // why dont we replace the display directly?		// guessiing a letter is easier
+bool hmguess(vector<char> ans,char input){ //check whether the guess is correct 
 	bool hmflag = false;
 	list<char> hmguesslist;
 	for (int i = 0; i < 5; i++) {
@@ -787,8 +787,8 @@ void bhangman() { // hangman for bot
 }
 
 
-int main() {
-	int playernum = 4; // number of players 
+int hangman() {
+	int playernum = 4; // number of players  // Waiting for how to call those functions
 	cout << "Wordle time! " << endl;
 	cout << "-----------------------------------------------------------------------------------------" << endl;
 	cout << "Player 1's turn! " << endl;
