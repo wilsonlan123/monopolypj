@@ -38,6 +38,8 @@ struct playerdata{
 	int position;
 };
 
+playerdata Character[4];
+
 void PvPcheck(string &PvP, int &PvPcorrectness){
     cout << "Multiplayers?\n( yes / no ): ";
     cin >> PvP;
@@ -76,13 +78,9 @@ void PlayerNocheck(int &PlayerNo, int &PlayerNocorrectness){
     }
 }
 
-int Rolladice (int numberofplayers,int &Rollcount){
+int Rolladice (){
     srand(time(0));
-    int dice = rand() % 6 + 1;
-    if (Rollcount % numberofplayers == 0){
-        //play a minigame
-    }
-    Rollcount += 1;
+    int dice = rand() % 6 + 1; 
     return dice;
 }
 
@@ -109,11 +107,12 @@ void PrintBoard() {
 	cout << "-------   -------   -------   -------   -------" << endl << endl;
 }
 
-void PrintBalance(playerdata Character[4], int n) {
+void PrintBalance(int n) {
 	  for (int i = 0; i < n; i++) {
-	  	cout << Character[i].name << " " << Character[i].pawn << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
+	  	cout << Character[i].pawn << " " << Character[i].name << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
 	  }
 }
+
 
 string PawnSelect(int n, string &Symbols, int i) {
 	     int temp;
@@ -258,15 +257,12 @@ int main(){
     }
     string Symbols = "○△□⬡●▲■⬢";
     int temp;
-    playerdata Character[BotNo + PlayerNo];
     if (PvP == "yes"){
-        //numberofplayers += PlayerNo;
         for (int i = 1; i <= PlayerNo; i++){
 	    Character[numberofplayers] = {"Player" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , 1500, 0};
 	    numberofplayers += 1;
 	}
         if (PvE == "yes"){
-            //numberofplayers += BotNo;
             for (int j = 1; j <= BotNo; j++){
 	    	temp = rand() % Symbols.length() + 1;
                 Character[numberofplayers] = {"Bot" + to_string(j), Symbols.substr(temp-1,1), 1500, 0};
@@ -276,8 +272,7 @@ int main(){
             }
         }
     } else{
-        //numberofplayers = numberofplayers + 1 +BotNo;
-        Character[numberofplayers] = {"Player1", PawnSelect(1, Symbols, charactercount) , 1500, 0};
+        Character[numberofplayers] = {"Player1", PawnSelect(1, Symbols, numberofplayers), 1500, 0};
 	numberofplayers +=1;
         for (int a = 1; a <= BotNo; a++) {
 	    temp = rand() % Symbols.length() + 1;
@@ -289,7 +284,7 @@ int main(){
     }
     cout << "------------------------------------------------------------------" << endl;
 	PrintBoard();
-	PrintBalance(Character, numberofplayers);
+	PrintBalance(numberofplayers);
 	bool GAMEOVER = false;
 	while (GAMEOVER == false){
 		turnsequence();
