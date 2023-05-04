@@ -83,6 +83,6 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
         cout<<"Winner is ..."<<players[(turn+1)%2]<<endl;
         cout<<"Congratulations! You win 500m!"<<endl;
         
-   Characters[players[(turn+1)%2]] += 500
-   Characters[players[(turn)%2]] -= 500 
+   //Characters[players[(turn+1)%2]] += 500
+   //Characters[players[(turn)%2]] -= 500 
    }
