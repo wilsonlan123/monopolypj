@@ -1,3 +1,18 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include<iostream> 
+#include<list>
+#include<vector>
+#include<random>
+#include<map>
+#include<string>
+
+
+
+
+
 void rolling_dice(int pdice, vector<int>& plst) { //function to generate a vector of random dice
     plst.clear();
     for (int i = 0; i < pdice; i++) {
