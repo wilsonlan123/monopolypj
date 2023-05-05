@@ -192,11 +192,18 @@ void minigame(int PlayerNum){
 	//implement boxinggame.cpp
     }else if (choice == 4){
 	//implement drawnearn.cpp
+	 // just call and bring in the size 
+	  // return the ranking list where 0 is First place , 1 is second place.etc
+	   
     } else if (choice == 5{
     	//implement hangman.cpp
     } else if (choice == 6{
     	//implement moneyswapfunction.cpp
-    } else if (choice == 7{
+    } else if (choice == 7{ 
+	    //call hangman game and brings in the number of players which is used to initiate the for loop 
+	    //return the array of chances left each player 
+	    // each player earn for $50 per chance
+	    
     	//implement hangman.cpp
     } else if (choice == 8{
     	//implement tictactoe.cpp
