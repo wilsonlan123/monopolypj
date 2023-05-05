@@ -188,10 +188,17 @@ void minigame(int PlayerNum){
     int prizepool;
     srand(time(0));
     int choice = rand() % 8 + 1;
+	
     if (choice == 1){
-	//implement diceroll.cpp
+	if (dice_rolling(Character[PlayerNum].name,"Bot1")){
+		Character[PlayerNum].BankBalance += 500;}
+	else{
+		Character[PlayerNum].BankBalance -= 500;}
     }else if (choice == 2){
-	//implement OneInAHudnred.cpp
+	if (one_in_a_hundred(Character[PlayerNum].name,"Bot1")){
+		Character[PlayerNum].BankBalance += 500;}
+	else{
+		Character[PlayerNum].BankBalance -= 500;}	
     }else if (choice == 3){
 	//implement boxinggame.cpp
     }else if (choice == 4){
