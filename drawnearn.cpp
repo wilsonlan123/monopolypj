@@ -33,7 +33,6 @@ void dgdrawnum() {
 
 int main() {
 	
-	playerdata Character[4] = { {"B1", "A", 15000,1, true}, {"B2", "B",15000,1,true}, {"B3", "B",15000,1,true}, {"B4", "",15000,1,true} };
 	cout << "Random Draw  time! " << endl;
 	cout << "Draw a number! And the larger is your number among you guys, the greater you will earn! " << endl;
 	for (int i = 0; i < sizeof(Character) / sizeof(Character[0]); i++) {
