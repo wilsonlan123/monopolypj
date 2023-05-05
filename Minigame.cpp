@@ -1,9 +1,3 @@
-
-
- 
-  
-
-
 #include<iostream>      // drawnum game earn by how large they random 
 #include<list>
 #include<vector>
@@ -37,13 +31,8 @@ int drawingnumber() {
 
 }
 
-#include<iostream> //hangman game 
-#include<list>
-#include<vector>
-#include<random>
-#include<map>
-#include<string>
 
+//hangman game 
 using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
 vector<char> hmguessbank{'B','C','D','E','A','K','M'};
