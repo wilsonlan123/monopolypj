@@ -161,7 +161,7 @@ void bhangman() { // hangman for bot
 }
 
 
-int main() {
+int hangmanminigame() {
 	srand(time(nullptr));
 	cout << "Wordle time! " << endl;
 	cout << "You have to guess a five letters word. \nEvery chances you left unused will be converted to a hundred! " << endl;
