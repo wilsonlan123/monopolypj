@@ -4,6 +4,9 @@
 #include<random>
 #include<map>
 #include<string>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
 vector<char> hmguessbank{ 'B','C','D','E','A','K','M' };
@@ -70,7 +73,6 @@ bool hmcheck() {
 }
 bool hmguess(vector<char> ans, char input) { //check whether the guess is correct 
 	bool hmflag = false;
-	list<char> hmguesslist;
 	for (int i = 0; i < 5; i++) {
 		char temp = ans[i];
 		if (input == ans[i]) {
@@ -152,7 +154,6 @@ void bhangman() { // hangman for bot
 		input = toUppercase(input);
 		cout << input << endl;
 		hmguess(hmanslist, input);
-
 	}
 	if (hmwin == false && chances == 0) {
 		cout << "You lose " << endl;
@@ -161,7 +162,7 @@ void bhangman() { // hangman for bot
 
 
 int main() {
-	cout << "-----------------------------------------------------------------------------------------" << endl;
+	srand(time(nullptr));
 	cout << "Wordle time! " << endl;
 	cout << "You have to guess a five letters word. \nEvery chances you left unused will be converted to a hundred! " << endl;
 	for (int i = 0; i < sizeof(Character)/sizeof(Character[0]); i++){
@@ -175,7 +176,7 @@ int main() {
 			}
 			if (hmwin == true) {
 				Character[i].BankBalance += 100 * chances;
-				cout << Character[i].name << " wins with " << chances << "chances left! " << endl;
+				cout << Character[i].name << " wins with " << chances << " chances left! " << endl;
 				cout << "He earns: " << 100 * chances << " Current balance: " << Character[i].BankBalance << endl;
 			}
 	}
@@ -188,5 +189,4 @@ int main() {
 	}
 	cout << "----------------" << endl;
 }
-
 
