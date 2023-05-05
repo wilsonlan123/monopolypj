@@ -8,11 +8,7 @@
 
 using namespace std;
 
-int main() {
-    srand(time(nullptr)); // Seed the random number generator with current time
-    
-    int npc_choice = rand() % 3; // Randomly choose NPC's option (0 = rock, 1 = paper, 2 = scissors)
-    
+void rock_paper_scissors(int npc_choice, struct Player Character[], int numberofplayers) {
     cout << "Enter your choice (0 = rock, 1 = paper, 2 = scissors): ";
     int user_choice;
     cin >> user_choice;
@@ -55,6 +51,27 @@ int main() {
         cout << "You win!" << endl;
     } else {
         cout << "NPC wins!" << endl;
+    }
+}
+
+int main() {
+    // ... Code to initialize the game board and player information ...
+    
+    srand(time(nullptr)); // Seed the random number generator with current time
+    
+    // Main game loop
+    while (true) {
+        // ... Code to move the current player to a new position on the board ...
+        
+        // Check if the current position triggers a rock-paper-scissors mini-game
+        if (current_position == 20) { // Example position that triggers the rock-paper-scissors mini-game
+            int npc_choice = rand() % numberofplayers;
+            rock_paper_scissors(npc_choice, Character, numberofplayers);
+        }
+        
+        // ... Code to handle other game actions ...
+        
+        current_player = (current_player + 1) % num_players; // Move to the next player's turn
     }
     
     return 0;
