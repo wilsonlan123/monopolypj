@@ -161,7 +161,7 @@ void bhangman() { // hangman for bot
 
 
 int main() {
-	playerdata Character[4] = { {"B1", "A", 15000,1, true}, {"B2", "B",15000,1,true}, {"B3", "B",15000,1,true}, {"B4", "",15000,1,true} };
+	cout << "-----------------------------------------------------------------------------------------" << endl;
 	cout << "Wordle time! " << endl;
 	cout << "You have to guess a five letters word. \nEvery chances you left unused will be converted to a hundred! " << endl;
 	for (int i = 0; i < sizeof(Character)/sizeof(Character[0]); i++){
