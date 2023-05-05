@@ -9,8 +9,8 @@
 
 using namespace std;
 
-// Function to randomly swap the money of two players
-void swap_money(int& player1_money, int& player2_money, int player1_num, int player2_num) {
+// Modified function to randomly swap the money of two players in the Character array
+void swap_money(int& player1_money, int& player2_money, int player1_num, int player2_num, struct Player Character[], int numberofplayers) {
     int temp = player1_money;
     player1_money = player2_money;
     player2_money = temp;
@@ -18,6 +18,14 @@ void swap_money(int& player1_money, int& player2_money, int player1_num, int pla
     cout << "Player " << player1_num << " now has $" << player1_money << "." << endl;
     cout << "Player " << player2_num << " now has $" << player2_money << "." << endl;
     cout << "The two players have swapped money!" << endl;
+    for (int i = 0; i < numberofplayers; i++) {
+        if (Character[i].name == "P" + to_string(player1_num)) {
+            Character[i].balance = player1_money;
+        }
+        else if (Character[i].name == "P" + to_string(player2_num)) {
+            Character[i].balance = player2_money;
+        }
+    }
 }
 
 int main() {
@@ -29,25 +37,22 @@ int main() {
     cin >> num_players;
     cout << endl;
     
-    int player_money[num_players];
-    for (int i = 0; i < num_players; i++) {
-        player_money[i] = 1500; // Set each player's starting money to $1500
-    }
-    
-    int current_player = 0; // Index of the current player
-    int current_position = 0; // Index of the current position on the board
+    // ... Code to initialize the game board and player information ...
     
     // Main game loop
     while (true) {
         // ... Code to move the current player to a new position on the board ...
         
-        // Check if the current position triggers a money swap
+        // Check if the current position triggers a money swap mini-game
         if (current_position == 10) { // Example position that triggers a money swap
-            int other_player = rand() % num_players;
-            while (other_player == current_player) { // Make sure the other player is not the current player
-                other_player = rand() % num_players;
+            int player1_index = rand() % numberofplayers;
+            int player2_index = rand() % numberofplayers;
+            while (player2_index == player1_index) { // Make sure the other player is not the current player
+                player2_index = rand() % numberofplayers;
             }
-            swap_money(player_money[current_player], player_money[other_player], current_player+1, other_player+1);
+            int player1_money = Character[player1_index].balance;
+            int player2_money = Character[player2_index].balance;
+            swap_money(player1_money, player2_money, player1_index+1, player2_index+1, Character, numberofplayers);
         }
         
         // ... Code to handle other game actions ...
