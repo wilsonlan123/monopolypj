@@ -198,7 +198,10 @@ void minigame(int PlayerNum){
 	//implement drawnearn.cpp
 	 // just call and bring in the size
 	  // return the ranking list where 0 is First place , 1 is second place.etc
-
+	vector<int> drawnearnranklist = drawnearn(4);
+	for (int i=0; i<4;i++){
+	    	Character[i].BankBalance += (4-drawnearnranklist[i]) * 50;
+	    }
     } else if (choice == 5){
     	//implement hangman.cpp
     } else if (choice == 6){
@@ -207,7 +210,9 @@ void minigame(int PlayerNum){
 	    //call hangman game and brings in the number of players which is used to initiate the for loop
 	    //return the array of chances left each player
 	    // each player earn for $50 per chance
-
+    	vector<int> hangmanchancelist = hangman(4,Character);
+    	for (int i=0; i<4;i++){
+		Character[i].BankBalance += (hangmanchancelist[i]) * 50;
     	//implement hangman.cpp
     } else if (choice == 8){
     	//implement tictactoe.cpp
