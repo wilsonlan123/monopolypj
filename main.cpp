@@ -32,7 +32,6 @@ square p[14] = { { "Start", -500, "     ", "     "},
 		{ "$100M", 100, "     ", "     ", 10},
 		{ "$50M ", 50, "     ", "     ", 10},
 		{ "$100M", 100, "     ", "     ", 10}};
-		
 
 struct playerdata{
 	string name;
@@ -43,16 +42,15 @@ struct playerdata{
 };
 
 
-
 playerdata Character[4];
+
 
 void PvPcheck(string &PvP, int &PvPcorrectness){
     cout << "Multiplayers?\n( yes / no ): ";
     cin >> PvP;
     if (PvP == "yes" || PvP == "no"){
         PvPcorrectness = 1;
-    }
-    else{
+    } else{
         cout << "Invalid input" << endl << endl;
     }
 }
@@ -92,7 +90,7 @@ int Rolladice (){
 
 void PrintBoard() {
         cout << "------------------------------------------------------------------" << endl << endl;
-    cout << "-------   -------   -------   -------   -------" << endl;
+	cout << "-------   -------   -------   -------   -------" << endl;
 	cout << "|" << p[7].title << "|   |" << p[8].title << "|   |" << p[9].title << "|   |" << p[10].title << "|   |" << p[11].title << "|" << endl;
 	cout << "|" << p[7].owner << "|   |" << p[8].owner << "|   |" << p[9].owner << "|   |" << p[10].owner << "|   |" << p[11].owner << "|" << endl;
 	cout << "|" << p[7].visitors << "|   |" << p[8].visitors << "|   |" << p[9].visitors << "|   |" << p[10].visitors << "|   |" << p[11].visitors << "|" << endl;
@@ -119,7 +117,6 @@ void PrintBalance(int n) {
 	  	cout << Character[i].pawn << " " << Character[i].name << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
 	  }
 }
-
 
 string PawnSelect(int n, string &Symbols, int i) {
 	     int temp;
@@ -163,8 +160,8 @@ bool gameover(int charactercount, int RollCount, int RoundCount) {
 	}
 }
 
-void bankrupt(int payer, int payee){
-}
+ void bankrupt(int payer, int payee){
+ }
 
 void minigame(int PlayerNum){
 }
@@ -317,7 +314,6 @@ int main(){
     }
     else{
         int BotNocorrectness = 0;
-        int BotNo = 0;
         while (BotNocorrectness == 0){
             string BotNoStr;
             cout << "Number of NPCs: ";
@@ -350,27 +346,28 @@ int main(){
     int temp;
     if (PvP == "yes"){
         for (int i = 1; i <= PlayerNo; i++){
-	    Character[numberofplayers] = {"Player" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , 1500, 0};
+	    Character[numberofplayers] = {"P" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , 1500, 0, false};
 	    numberofplayers += 1;
 	}
         if (PvE == "yes"){
             for (int j = 1; j <= BotNo; j++){
-	    	temp = rand() % Symbols.length() + 1;
-                Character[numberofplayers] = {"Bot" + to_string(j), Symbols.substr(temp-1,1), 1500, 0};
-		p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp-1,1));
+	    	temp = rand() % Symbols.length();
+                Character[numberofplayers] = {"Bot" + to_string(j), Symbols.substr(temp,1), 1500, 0, true};
+		p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp,1));
 		numberofplayers += 1;
-		Symbols.erase(temp-1,1);
+		Symbols.erase(temp,1);
             }
         }
     } else{
-        Character[numberofplayers] = {"Player1", PawnSelect(1, Symbols, numberofplayers), 1500, 0};
+        Character[numberofplayers] = {"P1", PawnSelect(1, Symbols, numberofplayers), 1500, 0, false};
 	numberofplayers +=1;
         for (int a = 1; a <= BotNo; a++) {
-	    temp = rand() % Symbols.length() + 1;
-            Character[numberofplayers] = {"Bot" + to_string(a), Symbols.substr(temp-1,1), 1500, 0};
-            p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp-1,1));
+	    temp = rand() % Symbols.length();
+            cout << temp << endl;
+	    Character[numberofplayers] = {"Bot" + to_string(a), Symbols.substr(temp,1), 1500, 0, true};
+            p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp,1));
 	    numberofplayers += 1;
-	    Symbols.erase(temp-1,1);
+	    Symbols.erase(temp,1);
         }
     }
 	PrintBoard();
@@ -390,5 +387,3 @@ int main(){
 	}
 
 }
-
-
