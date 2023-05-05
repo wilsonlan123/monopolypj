@@ -191,6 +191,10 @@ void minigame(int PlayerNum){
     }else if (choice == 3){
 	//implement boxinggame.cpp
     }else if (choice == 4){
+	    vector<int> drawnearnranklist = drawnearn(4);
+	    for (int i=0; i<4;i++){
+	    	Character[i].BankBalance += (4-drawnearnranklist[i]) * 50;
+	    }
 	//implement drawnearn.cpp
 	 // just call and bring in the size 
 	  // return the ranking list where 0 is First place , 1 is second place.etc
@@ -200,6 +204,10 @@ void minigame(int PlayerNum){
     } else if (choice == 6{
     	//implement moneyswapfunction.cpp
     } else if (choice == 7{ 
+	    vector<int> hangmanchancelist = hangman(4,Character);
+	    for (int i=0; i<4;i++){
+	    	Character[i].BankBalance += (hangmanchancelist[i]) * 50;
+	    }
 	    //call hangman game and brings in the number of players which is used to initiate the for loop 
 	    //return the array of chances left each player 
 	    // each player earn for $50 per chance
