@@ -8,6 +8,7 @@
 #include<random>
 #include<map>
 #include<string>
+using namespace std;
 
 
 
@@ -22,20 +23,23 @@ bool test_number(int a,int choice,int numrange[]){ //function used to update num
         cout << "Guess a number between "<<numrange[0] << " to "<< numrange[1]<<endl;
         return true;}
     else {
+        cout<<"GOLDEN NUMBER "<< a <<" IS FOUND!!!"<<endl;
         return false;
     }}
 
-void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundred
+bool one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundred
     int turn = 0;
     bool p1turn = true;
     int choice = 0;
     string players[] = {player1,player2};
     int a =  rand() % 100; // this is the winning number
     int numrange[] = {0,100};
-    cout<<"Welcome to Mini Game: <One in a hundred>"<<endl;
+    cout<<"Welcome to Mini Game(Single-Player): <One in a hundred>"<<endl;
+    cout<<"In this game, you will play against a bot"<<endl;
     cout<<"In this game, you are going to keep guessing a number until you guessed the correct GOLDEN NUMBER"<<endl;
     cout<<"You will be given the range of the number before every guess, and the range will become smaller each time a guess is made."<<endl;
     cout<<"Winner will be rewarded 500m!"<<endl;
+    cout<<"Loser will be penalized 500m from his balance!"<<endl;
     cout<<"ALL THE BEST!"<<endl;
     cout<<"Let's go!"<<endl;
     cout << "Guess a number between "<< numrange[0] << " to " << numrange[1] << endl;
@@ -81,8 +85,14 @@ void one_in_a_hundred(string player1, string player2){//MiniGame One In A Hundre
                 break;}
             }
         cout<<"Winner is ..."<<players[(turn+1)%2]<<endl;
-        cout<<"Congratulations! You win 500m!"<<endl;
+        if (((turn+1)%2) == 0){
+            cout<<"Congratulations! You win 500m!"<<endl;
+            return true;
+        }
+        else{
+            cout<<"You lose!"<<endl;
+            return false;
+        }
         
-   //Characters[players[(turn+1)%2]] += 500
-   //Characters[players[(turn)%2]] -= 500 
+
    }
