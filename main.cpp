@@ -200,7 +200,7 @@ void minigame(int PlayerNum){
 	  // return the ranking list where 0 is First place , 1 is second place.etc
 	vector<int> drawnearnranklist = drawnearn(4);
 	for (int i=0; i<4;i++){
-	    	Character[i].BankBalance += (4-drawnearnranklist[i]) * 50;
+	    	Character[i].BankBalance += (4-drawnearnranklist[i])/10.0 * MoneyPool;
 	    }
     } else if (choice == 5){
     	//implement hangman.cpp
@@ -212,7 +212,7 @@ void minigame(int PlayerNum){
 	    // each player earn for $50 per chance
     	vector<int> hangmanchancelist = hangman(4,Character);
     	for (int i=0; i<4;i++){
-		Character[i].BankBalance += (hangmanchancelist[i]) * 50;
+		Character[i].BankBalance += ((4-hangmanchancelist[i]))/10.0 * 50;
     	//implement hangman.cpp
     } else if (choice == 8){
     	//implement tictactoe.cpp
