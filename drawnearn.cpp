@@ -4,6 +4,8 @@
 #include<random>
 #include<map>
 #include<string>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 vector<int> scorelist;
@@ -32,11 +34,13 @@ void dgdrawnum() {
 
 
 int main() {
-	
-	cout << "Random Draw  time! " << endl;
+	srand(time(nullptr));
+	playerdata Character[4] = { {"B1", "A", 15000,1, true}, {"B2", "B",15000,1,true}, {"B3", "B",15000,1,true}, {"B4", "",15000,1,true} };
+	cout << "Random Draw time! " << endl;
 	cout << "Draw a number! And the larger is your number among you guys, the greater you will earn! " << endl;
 	for (int i = 0; i < sizeof(Character) / sizeof(Character[0]); i++) {
-		cout << "The drawing game. The larger number you can draw, the higher money you can get! " << endl;
+		cout << "--------------------------------" << endl;
+		cout << Character[i].name << "'s turn! " << endl;
 		for (int i = 0; i < 500; i++) {
 			dgnumbank.push_back(i);
 		}
