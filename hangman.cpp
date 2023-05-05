@@ -9,7 +9,6 @@
 
 using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
-vector<char> hmguessbank{ 'B','C','D','E','A','K','M' };
 map<string, int>hmplayer_scoremap;
 
 int chances = 8; // maybe we can lower it 
@@ -26,7 +25,21 @@ struct playerdata {
 };
 
 
+int errorchecking(vector<int> w) { // for loop for vectors to print out the guess or current or ans 
+	if (hmwin == true) {
+		for (auto it = w.begin(); it != w.end(); ++it) {
+			cout << *it;
 
+		}
+		return 0;
+	}
+	cout << "Current: ";
+	for (auto it = w.begin(); it != w.end(); ++it) {
+		cout << *it;
+	}
+	cout << endl;
+	return 1;
+}
 
 int hmfloop(vector<char> w) { // for loop for vectors to print out the guess or current or ans 
 	if (hmwin == true) {
@@ -103,7 +116,7 @@ bool hmguess(vector<char> ans, char input) { //check whether the guess is correc
 	}
 	return hmflag;
 }
-void phangman() { // hangman for human
+int phangman() { // hangman for human
 	hmveclean();
 	chances = 8;
 	hmwin = false;
@@ -123,13 +136,14 @@ void phangman() { // hangman for human
 		hmguess(hmanslist, input);
 	}
 	//player_scoremap[] = chances; // put player into this function then include its value into here
-
+	return chances;
 
 
 }
-void bhangman() { // hangman for bot 
+int bhangman() { // hangman for bot 
 	chances = 8;
 	hmwin = false;
+	vector<char> hmguessbank{ 'A','B','C','D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T'};
 	int hmrandom = rand() % hmwordbank.size();
 	hmanslist.clear();
 	string ans = hmwordbank[hmrandom];
@@ -154,39 +168,44 @@ void bhangman() { // hangman for bot
 		input = toUppercase(input);
 		cout << input << endl;
 		hmguess(hmanslist, input);
+		hmguessbank.erase(remove(hmguessbank.begin(), hmguessbank.end(), input), hmguessbank.end());
 	}
 	if (hmwin == false && chances == 0) {
 		cout << "You lose " << endl;
 	}
+	return chances;
 }
 
 
-int hangmanminigame() {
+int drawnnum(int size, playerdata c[4]) {
+	vector<int> rank;
+	vector<int> chancelist;
 	srand(time(nullptr));
 	cout << "Wordle time! " << endl;
 	cout << "You have to guess a five letters word. \nEvery chances you left unused will be converted to a hundred! " << endl;
-	for (int i = 0; i < sizeof(Character)/sizeof(Character[0]); i++){
+	for (int i = 0; i < size; i++) {
 		cout << "-----------------------------------------------------------------------------------------" << endl;
-			cout << Character[i].name << "'s turn! " << endl;
-			if (Character[i].NPC == true) {
-				bhangman();
-			}
-			else {
-				phangman();
-			}
-			if (hmwin == true) {
-				Character[i].BankBalance += 100 * chances;
-				cout << Character[i].name << " wins with " << chances << " chances left! " << endl;
-				cout << "He earns: " << 100 * chances << " Current balance: " << Character[i].BankBalance << endl;
-			}
+		cout << "Player "<< i << "'s turn! " << endl;
+		if (c[i].NPC == true) {
+			chancelist.push_back(bhangman());
+		}
+		else {
+			chancelist.push_back(phangman());
+		}
+		if (hmwin == true) {
+			cout << c[i].name << " wins with " << chances << " chances left! " << endl;
+		}
 	}
-	cout << "----------------" << endl;
-	cout << "The current balance: "<<endl;
-	cout << "----------------"<< endl;
-	cout << "|Name | Balance|" << endl;
-	for (int i = 0; i < sizeof(Character) / sizeof(Character[0]); i++) {
-		cout << "|" << Character[i].name << "   |  " << Character[i].BankBalance << " |" << endl;
+	//cout << errorchecking(chancelist);
+	//cout << "----------------" << endl;
+	///cout << "The current balance: "<<endl;
+	//cout << "----------------"<< endl;
+	//cout << "|Name | Balance|" << endl;
+	//for (int i = 0; i < sizeof(Character) / sizeof(Character[0]); i++) {
+	//	cout << "|" << Character[i].name << "   |  " << Character[i].BankBalance << " |" << endl;
+	//}
+	//cout << "----------------" << endl;
+	return chancelist;
 	}
-	cout << "----------------" << endl;
-}
+
 
