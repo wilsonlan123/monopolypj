@@ -91,6 +91,7 @@ int Rolladice (){
 }
 
 void PrintBoard() {
+        cout << "------------------------------------------------------------------" << endl << endl;
     cout << "-------   -------   -------   -------   -------" << endl;
 	cout << "|" << p[7].title << "|   |" << p[8].title << "|   |" << p[9].title << "|   |" << p[10].title << "|   |" << p[11].title << "|" << endl;
 	cout << "|" << p[7].owner << "|   |" << p[8].owner << "|   |" << p[9].owner << "|   |" << p[10].owner << "|   |" << p[11].owner << "|" << endl;
@@ -141,27 +142,28 @@ string PawnSelect(int n, string &Symbols, int i) {
 	     return selection;
 }
 
-
-bool gameover(int charactercount) {
+bool gameover(int charactercount, int RollCount, int RoundCount) {
 	if (charactercount == 1) {
 		return true;
 	}
-	cout << "End Game? (Yes/No): ";
-	string ans;
-	cin >> ans;
-	if (ans == "Yes" || ans == "yes"){
-		return true;
-	} else if (ans == "No" || ans == "no"){ 
-		return false;
+	if (RollCount == 0){
+		cout << "Round " << RoundCount << " Complete! Do you want to continue playing?\n(Yes/No): ";
+		string ans;
+		cin >> ans;
+		if (ans == "Yes" || ans == "yes"){
+			return false;
+		} else if (ans == "No" || ans == "no"){ 
+			return true;
+		} else {
+			cout << "Invalid input" << endl;
+			return gameover(charactercount, RollCount, RoundCount);
+		}
 	} else {
-		cout << "Invalid input" << endl;
-		return gameover(charactercount);
+	return false;
 	}
-	
 }
 
-
-void turnsequence(){
+void turnsequence(int activeplayers, int Rollcount){
 	int roll = Rolladice();
 	string temp;
 	if (Character[Rollcount].NPC == false){
@@ -177,40 +179,48 @@ void turnsequence(){
 	p[Character[Rollcount].position].visitors.replace(Rollcount, 1, " ");
 	Character[Rollcount].position = (Character[Rollcount].position + roll) % 14;
 	p[Character[Rollcount].position].visitors.replace(Rollcount, 1, Character[Rollcount].pawn);
-	PrintBoard();
-	if (p[Character[Rollcount].position].title == "Game "){
+	if (p[Character[Rollcount].position].title == "Mini "){
+		PrintBoard();
+		this_thread::sleep_for(2000ms);
+		cout << Character[Rollcount].name << " landed on a free mini game square!" << endl;
 		//MINIGAME SEQUENCE
 		return;
 	}
 	else if (p[Character[Rollcount].position].title == "Start"){
+		PrintBoard();
 		return;
 	}else {
 		if (p[Character[Rollcount].position].owner == "     "){
+			string temp;
 			if (Character[Rollcount].NPC == false){
-				cout << Character[Rollcount].name << " landed on a free property!\nWould you like to purchase? (Yes/No) ";
-				string temp;
+				PrintBoard();
+				cout << Character[Rollcount].name << " landed on a free property! Would you like to purchase for $" << p[Character[Rollcount].position].price << "M?\n(Yes/No): ";
 				cin >> temp;
 				while (temp != "Yes" && temp != "No"){
 					cout << endl << "Invalid input" << endl;
 					cin >> temp;
 				}
-				if (temp == "Yes"){
-					if (Character[Rollcount].BankBalance - p[Character[Rollcount].position].price < 0){
-						cout << "Oh no! You can't afford this property! :(" << endl;
-						return;
-					}else{
+			}
+			if (temp == "Yes" || Character[Rollcount].NPC == true){
+				if (Character[Rollcount].BankBalance - p[Character[Rollcount].position].price < 0){
+					cout << "Oh no! " << Character[Rollcount].name << " can't afford this property! :(" << endl;
+					return;
+				}else{
+					if (Character[Rollcount].NPC == true){
+						p[Character[Rollcount].position].owner =  Character[Rollcount].name + " ";
+					} else {
 						p[Character[Rollcount].position].owner = " " + Character[Rollcount].name + "  ";
-					 	p[Character[Rollcount].position].OwnerNum = Rollcount;
-					 	p[Character[Rollcount].position].title = "Owned";
-					 	Character[Rollcount].BankBalance -= p[Character[Rollcount].position].price;
-						cout << "You have $" << Character[Rollcount].BankBalance << "M remaining" << endl;
-						return;
 					}
+				 	p[Character[Rollcount].position].OwnerNum = Rollcount;
+				 	p[Character[Rollcount].position].title = "Owned";
+				 	Character[Rollcount].BankBalance -= p[Character[Rollcount].position].price;
+					PrintBoard();
+					cout << Character[Rollcount].name << " purchased a property!" << endl;
+					return;
 				}
 			}
 		}
 	}
-
 }
 
 int main(){
@@ -224,7 +234,7 @@ int main(){
         PvPcheck(PvP, PvPcorrectness);
     }
     string PvE;
-    int BotNo;
+    int BotNo = 0;
     int PlayerNo;
     if (PvP == "yes"){
         PvE = "no";
@@ -339,14 +349,19 @@ int main(){
 	    Symbols.erase(temp-1,1);
         }
     }
-    cout << "------------------------------------------------------------------" << endl;
 	PrintBoard();
 	PrintBalance(numberofplayers);
 	int activeplayers = numberofplayers;
 	bool GAMEOVER = false;
+	int RoundCount = 0;
 	while (GAMEOVER == false){
 		turnsequence(activeplayers, Rollcount);
-		GAMEOVER = gameover(activeplayers);
+		PrintBalance(numberofplayers);
+		if (Rollcount == activeplayers -1){
+			RoundCount += 1;
+		}
+		Rollcount = (Rollcount + 1) % activeplayers;
+		GAMEOVER = gameover(activeplayers, Rollcount, RoundCount);
 		Rollcount = (Rollcount + 1) % activeplayers;
 	}
 
