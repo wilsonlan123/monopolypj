@@ -32,7 +32,6 @@ square p[14] = { { "Start", -500, "     ", "     "},
 		{ "$100M", 100, "     ", "     ", 10},
 		{ "$50M ", 50, "     ", "     ", 10},
 		{ "$100M", 100, "     ", "     ", 10}};
-		
 
 struct playerdata{
 	string name;
@@ -43,16 +42,15 @@ struct playerdata{
 };
 
 
-
 playerdata Character[4];
+
 
 void PvPcheck(string &PvP, int &PvPcorrectness){
     cout << "Multiplayers?\n( yes / no ): ";
     cin >> PvP;
     if (PvP == "yes" || PvP == "no"){
         PvPcorrectness = 1;
-    }
-    else{
+    } else{
         cout << "Invalid input" << endl << endl;
     }
 }
@@ -92,7 +90,7 @@ int Rolladice (){
 
 void PrintBoard() {
         cout << "------------------------------------------------------------------" << endl << endl;
-    cout << "-------   -------   -------   -------   -------" << endl;
+	cout << "-------   -------   -------   -------   -------" << endl;
 	cout << "|" << p[7].title << "|   |" << p[8].title << "|   |" << p[9].title << "|   |" << p[10].title << "|   |" << p[11].title << "|" << endl;
 	cout << "|" << p[7].owner << "|   |" << p[8].owner << "|   |" << p[9].owner << "|   |" << p[10].owner << "|   |" << p[11].owner << "|" << endl;
 	cout << "|" << p[7].visitors << "|   |" << p[8].visitors << "|   |" << p[9].visitors << "|   |" << p[10].visitors << "|   |" << p[11].visitors << "|" << endl;
@@ -119,7 +117,6 @@ void PrintBalance(int n) {
 	  	cout << Character[i].pawn << " " << Character[i].name << " Bank Balance = $" << Character[i].BankBalance << "M" << endl;
 	  }
 }
-
 
 string PawnSelect(int n, string &Symbols, int i) {
 	     int temp;
@@ -164,26 +161,32 @@ bool gameover(int charactercount, int RollCount, int RoundCount) {
 }
 
 void bankrupt(int payer, int payee){
-    for (int i = 0; i < 14; i++){
-        if ((p[i].visitor).find(Character[payer].pawn) !=-1){
-            p[i].visitors.replace(Rollcount, 1, " ");
-        }
-    }
-    Character[payer].BankBalance = 0;
-    activeplayers--;
+	Character[payee].BankBalance += Character[payer].BankBalance;
+	Character[payer].BankBalance = 0;
+	for (int i = 1; i < 14; i++){
+		if (p[i].OwnerNum == payer){
+			p[i].OwnerNum = payee;
+			if (Character[payee].NPC == true){
+				p[i].owner = Character[payee].name + " ";
+			} else {
+				 p[i].owner = " " + Character[payee].name + "  ";
+			}
+		}
+	}
+	p[Character[payer].position].visitors.replace(payer, 1, " ");
 }
 
 void minigame(int PlayerNum){
     //betting <- System needs to be determined
     //MoneyPool ($xxxM)
-    //Subtract $yyyM
+    //Subtract $yyyM from each player
     //if one winner, output needs to be array index of winning player
     //if ranked, output needs to be the array of player indexes in ranked order,
     			//{3,2,0,1}
 			//function ranking[0] + 0.5* prize pool
 			//function ranking[1] + 0.25 * prize pool
     srand(time(0));
-    int choice = rand() % 8 + 1; 
+    int choice = rand() % 8 + 1;
     if (choice == 1){
 	//implement diceroll.cpp
     }else if (choice == 2){
@@ -191,34 +194,26 @@ void minigame(int PlayerNum){
     }else if (choice == 3){
 	//implement boxinggame.cpp
     }else if (choice == 4){
-	    vector<int> drawnearnranklist = drawnearn(4);
-	    for (int i=0; i<4;i++){
-	    	Character[i].BankBalance += (4-drawnearnranklist[i]) * 50;
-	    }
 	//implement drawnearn.cpp
-	 // just call and bring in the size 
+	 // just call and bring in the size
 	  // return the ranking list where 0 is First place , 1 is second place.etc
-	   
-    } else if (choice == 5{
+
+    } else if (choice == 5){
     	//implement hangman.cpp
-    } else if (choice == 6{
+    } else if (choice == 6){
     	//implement moneyswapfunction.cpp
-    } else if (choice == 7{ 
-	    vector<int> hangmanchancelist = hangman(4,Character);
-	    for (int i=0; i<4;i++){
-	    	Character[i].BankBalance += (hangmanchancelist[i]) * 50;
-	    }
-	    //call hangman game and brings in the number of players which is used to initiate the for loop 
-	    //return the array of chances left each player 
+    } else if (choice == 7){
+	    //call hangman game and brings in the number of players which is used to initiate the for loop
+	    //return the array of chances left each player
 	    // each player earn for $50 per chance
-	    
+
     	//implement hangman.cpp
-    } else if (choice == 8{
+    } else if (choice == 8){
     	//implement tictactoe.cpp
     }
 }
 
-void turnsequence(int Rollcount){
+void turnsequence(int activeplayers, int Rollcount){
 	int roll = Rolladice();
 	string temp;
 	if (Character[Rollcount].NPC == false){
@@ -232,17 +227,23 @@ void turnsequence(int Rollcount){
 	cout << Character[Rollcount].name << " rolled a " << roll << endl;
 	this_thread::sleep_for(2000ms);
 	p[Character[Rollcount].position].visitors.replace(Rollcount, 1, " ");
+	if (Character[Rollcount].position + roll > 13) {
+		cout << Character[Rollcount].name << " passed the start and earns $500M!" << endl;
+		this_thread::sleep_for(2000ms);
+		Character[Rollcount].BankBalance += 500;
+	}
 	Character[Rollcount].position = (Character[Rollcount].position + roll) % 14;
 	p[Character[Rollcount].position].visitors.replace(Rollcount, 1, Character[Rollcount].pawn);
 	if (p[Character[Rollcount].position].title == "Mini "){
 		PrintBoard();
-		this_thread::sleep_for(2000ms);
 		cout << Character[Rollcount].name << " landed on a mini game square!" << endl;
 		minigame(Rollcount);
+		this_thread::sleep_for(2000ms);
 		return;
 	}
 	else if (p[Character[Rollcount].position].title == "Start"){
 		PrintBoard();
+		this_thread::sleep_for(2000ms);
 		return;
 	}else {
 		if (p[Character[Rollcount].position].owner == "     "){
@@ -259,6 +260,7 @@ void turnsequence(int Rollcount){
 			if (temp == "Yes" || Character[Rollcount].NPC == true){
 				if (Character[Rollcount].BankBalance < p[Character[Rollcount].position].price){
 					cout << "Oh no! " << Character[Rollcount].name << " can't afford this property! :(" << endl;
+					this_thread::sleep_for(2000ms);
 					return;
 				}else{
 					if (Character[Rollcount].NPC == true){
@@ -271,6 +273,7 @@ void turnsequence(int Rollcount){
 				 	Character[Rollcount].BankBalance -= p[Character[Rollcount].position].price;
 					PrintBoard();
 					cout << Character[Rollcount].name << " purchased a property!" << endl;
+					this_thread::sleep_for(2000ms);
 					return;
 				}
 			}
@@ -284,10 +287,11 @@ void turnsequence(int Rollcount){
 				if (Character[Rollcount].BankBalance < p[Character[Rollcount].position].rent){
 					cout << Character[Rollcount].name << " can't afford to pay rent! :(" << endl;
 					bankrupt(Rollcount, owner);
-                    }
 				}
 				else {
 					cout << Character[Rollcount].name << " pays $" << p[Character[Rollcount].position].rent << "M in rent to " << Character[owner].name << endl;
+					Character[Rollcount].BankBalance -= p[Character[Rollcount].position].rent;
+					Character[owner].BankBalance += p[Character[Rollcount].position].rent;
 					return;
 				}
 			}
@@ -299,7 +303,6 @@ void turnsequence(int Rollcount){
 
 int main(){
     int numberofplayers = 0;
-    int Rollcount = 0;
     cout << "---Welcome to monopoly! ( special edition )---" << endl;
     cout << "-----------------------------Settings-----------------------------" << endl;
     int PvPcorrectness = 0;
@@ -367,7 +370,6 @@ int main(){
     }
     else{
         int BotNocorrectness = 0;
-        int BotNo = 0;
         while (BotNocorrectness == 0){
             string BotNoStr;
             cout << "Number of NPCs: ";
@@ -400,45 +402,50 @@ int main(){
     int temp;
     if (PvP == "yes"){
         for (int i = 1; i <= PlayerNo; i++){
-	    Character[numberofplayers] = {"Player" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , 1500, 0};
+	    Character[numberofplayers] = {"P" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , 1500, 0, false};
 	    numberofplayers += 1;
 	}
         if (PvE == "yes"){
             for (int j = 1; j <= BotNo; j++){
-	    	temp = rand() % Symbols.length() + 1;
-                Character[numberofplayers] = {"Bot" + to_string(j), Symbols.substr(temp-1,1), 1500, 0};
-		p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp-1,1));
+	    	temp = rand() % Symbols.length();
+                Character[numberofplayers] = {"Bot" + to_string(j), Symbols.substr(temp,1), 1500, 0, true};
+		p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp,1));
 		numberofplayers += 1;
-		Symbols.erase(temp-1,1);
+		Symbols.erase(temp,1);
             }
         }
     } else{
-        Character[numberofplayers] = {"Player1", PawnSelect(1, Symbols, numberofplayers), 1500, 0};
+        Character[numberofplayers] = {"P1", PawnSelect(1, Symbols, numberofplayers), 1500, 0, false};
 	numberofplayers +=1;
         for (int a = 1; a <= BotNo; a++) {
-	    temp = rand() % Symbols.length() + 1;
-            Character[numberofplayers] = {"Bot" + to_string(a), Symbols.substr(temp-1,1), 1500, 0};
-            p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp-1,1));
+	    temp = rand() % Symbols.length();
+	    Character[numberofplayers] = {"Bot" + to_string(a), Symbols.substr(temp,1), 1500, 0, true};
+            p[0].visitors.replace(numberofplayers,1,Symbols.substr(temp,1));
 	    numberofplayers += 1;
-	    Symbols.erase(temp-1,1);
+	    Symbols.erase(temp,1);
         }
     }
 	PrintBoard();
 	PrintBalance(numberofplayers);
 	int activeplayers = numberofplayers;
+	string FinalRank[numberofplayers];
 	bool GAMEOVER = false;
+	int RollCount = 0;
 	int RoundCount = 0;
 	while (GAMEOVER == false){
-        if (Character[Rollcount].Balance != 0){
-		    turnsequence(Rollcount);
-        }
+		turnsequence(activeplayers, RollCount);
 		PrintBalance(numberofplayers);
 		this_thread::sleep_for(5000ms);
-		if (Rollcount == numberofplayers -1){
+		if (RollCount == activeplayers -1){
 			RoundCount += 1;
 		}
-		Rollcount = (Rollcount + 1) % numberofplayers;
-		GAMEOVER = gameover(activeplayers, Rollcount, RoundCount);
+		if (Character[RollCount].BankBalance == 0){
+			FinalRank[activeplayers-1] = Character[RollCount].name;
+			activeplayers -= 1;
+			RollCount -= 1;
+		}
+		RollCount = (RollCount + 1) % activeplayers;
+		GAMEOVER = gameover(activeplayers, RollCount, RoundCount);
 	}
 
 }
