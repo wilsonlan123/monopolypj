@@ -177,7 +177,7 @@ int bhangman() { // hangman for bot
 }
 
 
-int drawnnum(int size, playerdata c[4]) {
+int hangman(int size, playerdata c[4]) {
 	vector<int> rank;
 	vector<int> chancelist;
 	srand(time(nullptr));
