@@ -185,6 +185,7 @@ int bhangman() { // hangman for bot
 int hangman(int size, playerdata c[4]) {
 	vector<int> rank;
 	vector<int> chancelist;
+	vector<int> oplist;
 	srand(time(nullptr));
 	cout << "Wordle time! " << endl;
 	cout << "You have to guess a five letters word. \nEvery chances you left unused will be converted to a hundred! " << endl;
@@ -192,10 +193,13 @@ int hangman(int size, playerdata c[4]) {
 		cout << "-----------------------------------------------------------------------------------------" << endl;
 		cout << "Player "<< i << "'s turn! " << endl;
 		if (c[i].NPC == true) {
-			chancelist.push_back(bhangman());
-		}
-		else {
-			chancelist.push_back(phangman());
+			int temp = bhangman();
+			chancelist.push_back(temp);
+			oplist.push_back(temp);		
+		}else {
+			int temp = phangman();
+			chancelist.push_back(temp);
+			oplist.push_back(temp);		
 		}
 		if (hmwin == true) {
 			cout << c[i].name << " wins with " << chances << " chances left! " << endl;
@@ -210,7 +214,14 @@ int hangman(int size, playerdata c[4]) {
 	//	cout << "|" << Character[i].name << "   |  " << Character[i].BankBalance << " |" << endl;
 	//}
 	//cout << "----------------" << endl;
-	return chancelist;
+	for (int i = 0; i < oplist.size(); i++) {
+	for (int j = 0; j < chancelist.size(); j++) {
+		if (chancelist[j] == oplist[i]) {
+			rank.push_back(j);
+			}
+		}
+	}
+	return rank;
 	}
 
 
