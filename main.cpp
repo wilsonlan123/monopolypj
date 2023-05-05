@@ -14,24 +14,24 @@ struct square{
 	int price;
 	string owner;
 	string visitors;
+	int rent;
 	int OwnerNum;
 };
 
-
 square p[14] = { { "Start", -500, "     ", "     "},
-		{ "$250M", 250, "     ", "     "},
-		{ "$300M", 300, "     ", "     "},
+		{ "$250M", 250, "     ", "     ", 10},
+		{ "$300M", 300, "     ", "     ", 10},
 		{ "Mini ", 0, "Game ", "     "},
-		{ "$250M", 250, "     ", "     "},
-		{ "$250M", 250, "     ", "     "},
+		{ "$250M", 250, "     ", "     ", 10},
+		{ "$250M", 250, "     ", "     ", 10},
 		{ "Mini ", 0, "Game ", "     "},
-		{ "$500M", 500, "     ", "     "},
-		{ "$150M", 150, "     ", "     "},
-		{ "$150M", 150, "     ", "     "},
+		{ "$500M", 500, "     ", "     ", 10},
+		{ "$150M", 150, "     ", "     ", 10},
+		{ "$150M", 150, "     ", "     ", 10},
 		{ "Mini ", 0, "Game ", "     "},
-		{ "$100M", 100, "     ", "     "},
-		{ "$50M ", 50, "     ", "     "},
-		{ "$100M", 100, "     ", "     "}};
+		{ "$100M", 100, "     ", "     ", 10},
+		{ "$50M ", 50, "     ", "     ", 10},
+		{ "$100M", 100, "     ", "     ", 10}};
 		
 
 struct playerdata{
@@ -163,6 +163,12 @@ bool gameover(int charactercount, int RollCount, int RoundCount) {
 	}
 }
 
+void bankrupt(int payer, int payee){
+}
+
+void minigame(int PlayerNum){
+}
+
 void turnsequence(int activeplayers, int Rollcount){
 	int roll = Rolladice();
 	string temp;
@@ -182,8 +188,8 @@ void turnsequence(int activeplayers, int Rollcount){
 	if (p[Character[Rollcount].position].title == "Mini "){
 		PrintBoard();
 		this_thread::sleep_for(2000ms);
-		cout << Character[Rollcount].name << " landed on a free mini game square!" << endl;
-		//MINIGAME SEQUENCE
+		cout << Character[Rollcount].name << " landed on a mini game square!" << endl;
+		minigame(Rollcount);
 		return;
 	}
 	else if (p[Character[Rollcount].position].title == "Start"){
@@ -202,7 +208,7 @@ void turnsequence(int activeplayers, int Rollcount){
 				}
 			}
 			if (temp == "Yes" || Character[Rollcount].NPC == true){
-				if (Character[Rollcount].BankBalance - p[Character[Rollcount].position].price < 0){
+				if (Character[Rollcount].BankBalance < p[Character[Rollcount].position].price){
 					cout << "Oh no! " << Character[Rollcount].name << " can't afford this property! :(" << endl;
 					return;
 				}else{
@@ -219,9 +225,27 @@ void turnsequence(int activeplayers, int Rollcount){
 					return;
 				}
 			}
+		} else {
+			PrintBoard();
+			int owner = p[Character[Rollcount].position].OwnerNum;
+			if (owner == Rollcount) {
+				cout << Character[Rollcount].name << " landed on a their own property, they're safe!" << endl;
+			} else {
+				cout << "Oh no! " << Character[Rollcount].name << " landed on " <<  Character[owner].name << "'s property!" << endl;
+				if (Character[Rollcount].BankBalance < p[Character[Rollcount].position].rent){
+					cout << Character[Rollcount].name << " can't afford to pay rent! :(" << endl;
+					bankrupt(Rollcount, owner);
+				}
+				else {
+					cout << Character[Rollcount].name << " pays $" << p[Character[Rollcount].position].rent << "M in rent to " << Character[owner].name << endl;
+					return;
+				}
+			}
 		}
 	}
 }
+
+
 
 int main(){
     int numberofplayers = 0;
@@ -357,12 +381,12 @@ int main(){
 	while (GAMEOVER == false){
 		turnsequence(activeplayers, Rollcount);
 		PrintBalance(numberofplayers);
+		this_thread::sleep_for(5000ms);
 		if (Rollcount == activeplayers -1){
 			RoundCount += 1;
 		}
 		Rollcount = (Rollcount + 1) % activeplayers;
 		GAMEOVER = gameover(activeplayers, Rollcount, RoundCount);
-		Rollcount = (Rollcount + 1) % activeplayers;
 	}
 
 }
