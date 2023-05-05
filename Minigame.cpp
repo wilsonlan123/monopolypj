@@ -151,25 +151,16 @@ void bhangman() { // hangman for bot
 }
 
 
-int hangman() {
-	int playernum = 4; // number of players  // Waiting for how to call those functions
+int main() {
 	cout << "Wordle time! " << endl;
-	cout << "-----------------------------------------------------------------------------------------" << endl;
-	cout << "Player 1's turn! " << endl;
-	phangman();
-	cout << "-----------------------------------------------------------------------------------------" << endl; 
-	cout << "Bot 1's turn! " << endl;
-	bhangman();
-	cout << "-----------------------------------------------------------------------------------------" << endl;
-	cout << "Bot 2's turn! " << endl;
-	bhangman();
-	cout << "-----------------------------------------------------------------------------------------" << endl;
-	cout << "Bot 3's turn! " << endl;
-	bhangman();
-	cout << "-----------------------------------------------------------------------------------------" << endl;
-	cout << "Bot 4's turn! " << endl;
-	bhangman();
-
-
+	for (int i=0;i<characters.size();i++{
+		cout << "-----------------------------------------------------------------------------------------" << endl;
+		cout << characters[i].name << "'s turn! " << endl;
+		if (characters[i].npc == true){
+			bhangman();
+		}else{
+			phangman();
+		}
+	}
 }
 
