@@ -174,16 +174,32 @@ void bankrupt(int payer, int payee){
 }
 
 void minigame(int PlayerNum){
+    //betting <- System needs to be determined
+    //MoneyPool ($xxxM)
+    //Subtract $yyyM
+    //if one winner, output needs to be array index of winning player
+    //if ranked, output needs to be the array of player indexes in ranked order,
+    			//{3,2,0,1}
+			//function ranking[0] + 0.5* prize pool
+			//function ranking[1] + 0.25 * prize pool
     srand(time(0));
-    int choice = rand() % 4 + 1; 
+    int choice = rand() % 8 + 1; 
     if (choice == 1){
-
+	//implement diceroll.cpp
     }else if (choice == 2){
-
+	//implement OneInAHudnred.cpp
     }else if (choice == 3){
-
+	//implement boxinggame.cpp
     }else if (choice == 4){
-
+	//implement drawnearn.cpp
+    } else if (choice == 5{
+    	//implement hangman.cpp
+    } else if (choice == 6{
+    	//implement moneyswapfunction.cpp
+    } else if (choice == 7{
+    	//implement hangman.cpp
+    } else if (choice == 8{
+    	//implement tictactoe.cpp
     }
 }
 
