@@ -1,4 +1,10 @@
 //hangman game 
+#include<iostream>      
+#include<list>
+#include<vector>
+#include<random>
+#include<map>
+#include<string>
 using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
 vector<char> hmguessbank{'B','C','D','E','A','K','M'};
