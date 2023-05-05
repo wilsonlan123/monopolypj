@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -8,9 +9,7 @@
 #include<random>
 #include<map>
 #include<string>
-
-
-
+using namespace std;
 
 
 void rolling_dice(int pdice, vector<int>& plst) { //function to generate a vector of random dice
@@ -32,15 +31,16 @@ int check_number(int choice, vector<int> plst, int pdice) { //function to check 
     return number_of_dulplicate;
     }
 
-void dice_rolling(string player1, string player2){//MiniGame Rolling Dice
+bool dice_rolling(string player1, string player2){//MiniGame Rolling Dice
 int choice = 0;
     cout << "========================================================================================" << endl;
-    cout<< "Welcome to Mini-Game: Rolling dice"<<endl;
-    cout<<"In this game, both players have 5 dices initially."<<endl;
-    cout<<"Both players take turn to take a guess between number from 1 to 6"<<endl;
+    cout<< "Welcome to Mini-Game(Single-Player): Rolling dice"<<endl;
+    cout<<"You will play against a bot."<<endl;
+    cout<<"In this game, both players take turn make a correct guess within 4 randomly-generated dice"<<endl;
     cout<<"A correct guess allows players to eliminate the number from its dice"<<endl;
-    cout<<"For example, Player 1 has 5 dices, he takes a guess of 3, fortunately, dice are [1,3,4,2,3] after the round."<<endl;
-    cout<<"His dice become [1,4,2] after eliminating 3"<<endl;
+    cout<<"For example, Player 1 has 4 dice, he takes a guess of 3, fortunately, dice are [3,4,2,3] after the round."<<endl;
+    cout<<"Notice there are 2'3' in the dice"<<endl;
+    cout<<"He still has 2 more dice to guess"<<endl;
     cout<<endl;
     cout<<"Player with 0 dice left will win the game"<<endl;
     cout<<"GAME BEGINS NOW!"<<endl;
@@ -49,8 +49,8 @@ int choice = 0;
    
     vector<int> p1lst;
     vector<int> p2lst;
-    int p1dice = 5;
-    int p2dice = 5;
+    int p1dice = 4;
+    int p2dice = 4;
     rolling_dice(p1dice, p1lst);
     rolling_dice(p2dice, p2lst);
     bool p1turn = true;
@@ -79,9 +79,11 @@ int choice = 0;
                 cout<<p1lst[i]<<"  ";
             }
             cout << endl;
+
             a = check_number(choice, p1lst, p1dice);
             p1dice -= a;
-            cout << "Number of dice of " << player1 << "= " << p1dice << endl;
+
+            cout << player1 << " still have "<< p1dice <<" to guess!" <<endl;
             cout<<endl;
             p1turn = !p1turn;}
         else{
@@ -108,23 +110,22 @@ int choice = 0;
             }
         cout << endl;
         b = check_number(choice, p2lst, p2dice);
+
         p2dice -= b;
-        cout << "Number of dice of " << player2 << "= " << p2dice << endl;
+
+        cout << player2 << " still have "<< p2dice <<" to guess!"<< endl;
         cout<<endl;
         p1turn = !p1turn;}
     if (p1dice <= 0) {
         cout << "Winner is " << player1 << " ! Congratulations!\n";
         cout << "You win 500m!"<<endl;
-        //Characters[player1] += 500;
-        //Characters[player2] -= 500;
+        return true;
         break;
     }
     else if (p2dice <= 0) {
-        cout << "Winner is " << player2 << " ! Congratulations!\n";
-        cout << "You win 500m!"<<endl;
-        //Characters[player2] += 500;
-        //Characters[player1] -= 500;
+        cout << "Winner is " << player2 <<endl;
+        cout<<"You lose 500m!"<<endl;
+        return false;
         break;
     }
-    return ;
 }}
