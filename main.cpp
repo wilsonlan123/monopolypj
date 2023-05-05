@@ -185,6 +185,7 @@ void minigame(int PlayerNum){
     			//{3,2,0,1}
 			//function ranking[0] + 0.5* prize pool
 			//function ranking[1] + 0.25 * prize pool
+    int prizepool;
     srand(time(0));
     int choice = rand() % 8 + 1;
     if (choice == 1){
