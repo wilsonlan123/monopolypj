@@ -1,4 +1,4 @@
-#include<iostream>      // drawnum game earn by how large they random 
+#include<iostream>
 #include<list>
 #include<vector>
 #include<random>
@@ -6,29 +6,60 @@
 #include<string>
 using namespace std;
 
+vector<int> scorelist;
+vector<int> oplist;
+
+struct playerdata {
+	string name;
+	string pawn;
+	int BankBalance;
+	int position;
+	bool NPC;
+};
+
 vector<int> dgnumbank;
 map<string, int>player_scoremap;
-void dgdrawnum(string i) {
+void dgdrawnum() {
 	cout << "Time to draw! " << endl;
-	int dgrandom = rand() % numbank.size();
+	int dgrandom = rand() % dgnumbank.size();
 
-	int score = numbank[dgrandom];
-	cout << "The drawn number is " << numbank[dgrandom] << endl;
-	player_scoremap.insert({ i,score });
+	int score = dgnumbank[dgrandom];
+	cout << "The drawn number is " << dgnumbank[dgrandom] << endl;
+	scorelist.push_back(score);
+	oplist.push_back(score);
 }
+
 
 
 int main() {
-	cout << "The drawing number game. The larger number you can draw, the more you can get! " << endl;
-	for (int i = 0; i < 500; i++) {
-		dgnumbank.push_back(i);
-	}
-	for (int i = 0; i < 6; i++) {
+	
+	playerdata Character[4] = { {"B1", "A", 15000,1, true}, {"B2", "B",15000,1,true}, {"B3", "B",15000,1,true}, {"B4", "",15000,1,true} };
+	cout << "Random Draw  time! " << endl;
+	cout << "Draw a number! And the larger is your number among you guys, the greater you will earn! " << endl;
+	for (int i = 0; i < sizeof(Character) / sizeof(Character[0]); i++) {
+		cout << "The drawing game. The larger number you can draw, the higher money you can get! " << endl;
+		for (int i = 0; i < 500; i++) {
+			dgnumbank.push_back(i);
+		}
 		string temp = to_string(i);
-		dgdrawnum(temp);
+		dgdrawnum();
+		
 	}
+	sort(oplist.begin(), oplist.end());
+	for (int i = 0; i < oplist.size(); i++) {
+		for (int j = 0; j < scorelist.size(); j++) {
+			if (scorelist[j] == oplist[i]) {
+				Character[i].BankBalance += i * 50;
+			}
+		}
+	}
+	cout << "----------------" << endl;
+	cout << "The current balance: " << endl;
+	cout << "----------------" << endl;
+	cout << "|Name | Balance|" << endl;
+	for (int i = 0; i < sizeof(Character) / sizeof(Character[0]); i++) {
+		cout << "|" << Character[i].name << "   |  " << Character[i].BankBalance << " |" << endl;
+	}
+	cout << "----------------" << endl;
 	return 0;
-
-}
-
-
+	}
