@@ -9,6 +9,7 @@
 #include <limits>
 using namespace std;
 
+//data structure for storing information on each square of the board
 struct square{
 	string title;
 	int price;
@@ -18,6 +19,7 @@ struct square{
 	int OwnerNum;
 };
 
+//declaring the array of the data strucuture for the board
 square p[14] = { { "Start", 500, "     ", "     "},
 		{ "$250M", 250, "     ", "     "},
 		{ "$300M", 300, "     ", "     "},
@@ -33,6 +35,7 @@ square p[14] = { { "Start", 500, "     ", "     "},
 		{ "$50M ", 50, "     ", "     "},
 		{ "$100M", 100, "     ", "     "}};
 
+//data structure for storing information on each player
 struct playerdata{
 	string name;
 	string pawn;
@@ -42,10 +45,12 @@ struct playerdata{
 	bool bankrupt;
 };
 
-
+//declaring the array of playerdata, NEED TO CHANGE TO DYNAMIC ARRAY FOR PROJECT REQUIRMENTS
 playerdata Character[4];
 
-
+//what it does: checking the input of whether the user wants PvP enabled
+//inputs: user input and PvPcorrectness to check if user input is valid
+//output: program will change variable PvPcorrectness to 1 if input is valid
 void PvPcheck(string &PvP, int &PvPcorrectness){
     cout << "Multiplayers?\n( yes / no ): ";
     cin >> PvP;
@@ -56,6 +61,9 @@ void PvPcheck(string &PvP, int &PvPcorrectness){
     }
 }
 
+//what it does: checking input of number player characters the user wants and storing the value if valid
+//inputs: user input number of player characters and PvPcorrectness to check if user input is valid
+//output: program will change variable PlayerNo to the user input if the input is valid
 void PlayerNocheck(int &PlayerNo, int &PlayerNocorrectness){
     string PlayerNoStr;
     cout << "Number of players( < 5 ): ";
@@ -83,12 +91,17 @@ void PlayerNocheck(int &PlayerNo, int &PlayerNocorrectness){
     }
 }
 
+//what it does: simulate dice roll
+//inputs: no input
+//output: random int from 1 to 6;
 int Rolladice (){
     srand(time(0));
     int dice = rand() % 6 + 1; 
     return dice;
 }
-
+//what it does: print the current state of the board
+//inputs: none
+//output: prints the game board
 void PrintBoard() {
         cout << "------------------------------------------------------------------" << endl << endl;
 	cout << "-------   -------   -------   -------   -------" << endl;
@@ -113,6 +126,9 @@ void PrintBoard() {
 	cout << "-------   -------   -------   -------   -------" << endl << endl;
 }
 
+//what it does: prints list of current characters and their bank balances
+//inputs: number of players, int n
+//output: prints the character name and their bank balance on each line
 void PrintBalance(int n) {
 	  for (int i = 0; i < n; i++) {
 	  	if (Character[i].bankrupt == true){
@@ -123,6 +139,9 @@ void PrintBalance(int n) {
 	  }
 }
 
+//what it does: allows users to select their pawns for the game, places pawn on the board and links to their playerdata
+//inputs: player number, string of pawn options, playerdata array index
+//output: program will output the pawn of the users choosing as a string, additionally the pawn will be added to board (p[])
 string PawnSelect(int n, string &Symbols, int i) {
 	     int temp;
 	     string selection;
@@ -144,6 +163,9 @@ string PawnSelect(int n, string &Symbols, int i) {
 	     return selection;
 }
 
+//what it does: checks if game has ended by checking if only 1 player remains and by asking the user if they wish to end the game
+//inputs: number of active character, playerdata array index of active character, number of game rounds completed
+//output: true if conditions have been met for game to be over, false if not
 bool gameover(int charactercount, int RollCount, int RoundCount) {
 	if (charactercount == 1) {
 		return true;
@@ -165,6 +187,9 @@ bool gameover(int charactercount, int RollCount, int RoundCount) {
 	}
 }
 
+//what it does: declares character as bankrupt and transfers all their money and property to the player they owe rent to
+//inputs: playerdata array index of bankrupt character, playerdata array index of character charging rent
+//output: no output, bankrupt character marked as bankrupt, money and properties moved to other player
 void bankrupt(int payer, int payee){
 	cout << Character[payer].name << " declares bankrupcy :(" << endl;
 	Character[payee].BankBalance += Character[payer].BankBalance;
@@ -183,6 +208,9 @@ void bankrupt(int payer, int payee){
 	p[Character[payer].position].visitors.replace(payer, 1, " ");
 }
 
+//what it does: selects a random minigame, creates prizepool, distributes prizemoney
+//inputs: playerdata array index of active character
+//output: no output, prizemoney distrubuted to winning characters
 void minigame(int PlayerNum){
     //betting <- System needs to be determined
     //MoneyPool ($xxxM)
@@ -233,6 +261,9 @@ void minigame(int PlayerNum){
     }
 }
 
+//what it does: regular character turnsequence, roll dice, line on square, buy property/pay rent/play mini game etc
+//inputs: number of players, playerdata array index of active character
+//output: no output, changes playerdata and board based on events
 void turnsequence(int activeplayers, int Rollcount){
 	int roll = Rolladice();
 	string temp;
@@ -324,7 +355,9 @@ void turnsequence(int activeplayers, int Rollcount){
 }
 
 
-
+//what it does: Runs main functionality of the game, calls other functions
+//inputs: none
+//output: no output
 int main(){
     for (int i = 0; i < 14; i++){
     	p[i].rent = p[i].price/5;
@@ -427,7 +460,7 @@ int main(){
     }
     string Symbols = "○△□⬡●▲■⬢";
     int temp;
-    int Start$ = 300;
+    int Start$ = 1500;
     if (PvP == "yes"){
         for (int i = 1; i <= PlayerNo; i++){
 	    Character[numberofplayers] = {"P" + to_string(i), PawnSelect(i, Symbols, numberofplayers) , Start$, 0, false};
