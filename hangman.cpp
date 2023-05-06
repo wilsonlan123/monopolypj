@@ -205,7 +205,7 @@ vector<int> hangman(int size) {
 			oplist.push_back(temp);		
 		}
 		if (hmwin == true) {
-			cout << c[i].name << " wins with " << chances << " chances left! " << endl;
+			cout << "Player "<< i << " wins with " << chances << " chances left! " << endl;
 		}
 	}
 	//cout << errorchecking(chancelist);
