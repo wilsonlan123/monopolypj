@@ -257,7 +257,7 @@ void minigame(int PlayerNum){
     	vector<int> hangmanchancelist = hangman(4);
     	for (int i=0; i<4;i++){
 		Character[i].BankBalance += ((4-hangmanchancelist[i]))/10.0 * 50;
-    	//implement hangman.cpp
+	}//implement hangman.cpp
     } else if (choice == 8){
     	//implement tictactoe.cpp
     }
