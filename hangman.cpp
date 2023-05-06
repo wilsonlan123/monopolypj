@@ -6,6 +6,7 @@
 #include<string>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 
 using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
