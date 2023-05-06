@@ -455,7 +455,7 @@ int main(){
             }
         }
     }
-    string Symbols = "○△□⬡●▲■⬢";
+    string Symbols = "~@#%^&<>";
     int temp;
     int Start$ = 1500;
     if (PvP == "yes"){
