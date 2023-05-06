@@ -12,7 +12,7 @@
 # Game Decription and Game Rules (Problem statement)
 This is a multiplayer monopoly game. 
 In this game, you can play with different friends.
-Each player starts the game with $1500m.
+Each player starts the game with $1500M.
 Each player places his token on the corner marked "GO", and throw the dice and move his the number of spaces indicated by the dice.
 The tokens remain on the spaces occupied and proceed from that point on the player's next turn.
 Two or more tokens may rest on the same space at the same time.
