@@ -9,6 +9,8 @@
 #include <limits>
 #include "DiceRolling.h"
 #include "OneInAHundred.h"
+#include "drawnman.h"
+#include "hangman.h"
 using namespace std;
 
 //data structure for storing information on each square of the board
