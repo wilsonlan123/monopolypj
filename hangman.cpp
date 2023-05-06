@@ -185,7 +185,7 @@ vector<int> hangman(int size) {
 	for (int i = 0; i < size; i++) {
 		cout << "-----------------------------------------------------------------------------------------" << endl;
 		cout << "Player "<< i << "'s turn! " << endl;
-		cout << "Is player " << i << "NPC?(y/n) " << endl;
+		cout << "Is player " << i << " NPC?(y/n) " << endl;
 		string npc;
 		cin >> npc;
 		if (npc == "y") {
