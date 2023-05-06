@@ -18,6 +18,11 @@ The tokens remain on the spaces occupied and proceed from that point on the play
 Two or more tokens may rest on the same space at the same time.
 Depending on the space the token reaches, you may buy the property, or be obliged to pay rent, pay taxes or etc...
 
+# Problem statement
+The game can be played with at most 4 players. After running the game code, some questions will pompt up.
+By answering the questions, you can set players to either real person or NPC.
+You can play with other people or play against computers if you want.
+
 ## Buying Property
 When you land on an unowned property you can buy that property from the Bank at its printed price.
 You receive the Title Deed card showing ownership.
