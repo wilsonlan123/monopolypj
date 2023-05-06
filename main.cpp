@@ -247,11 +247,8 @@ void minigame(int PlayerNum){
 	for (int i=0; i<4;i++){
 	    	Character[i].BankBalance += (4-drawnearnranklist[i])/10.0 * 60;
 	    }
-    } else if (choice == 5){
-    	//implement hangman.cpp
-    } else if (choice == 6){
-    	//implement moneyswapfunction.cpp
-    } else if (choice == 4){
+    } 
+     else if (choice == 4){
 	    //call hangman game and brings in the number of players which is used to initiate the for loop
 	    //return the array of chances left each player
 	    // each player earn for $50 per chance
