@@ -131,9 +131,6 @@ int phangman() { // hangman for human
 		if (isalpha(input) == true){
 			input = toUppercase(input);
 			hmguess(hmanslist, input);
-		}else{
-			cout << "Invalid Input "<<endl;
-	
 		}
 	}
 	//player_scoremap[] = chances; // put player into this function then include its value into here
