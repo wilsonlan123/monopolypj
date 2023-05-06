@@ -11,13 +11,7 @@ using namespace std;
 vector<int> scorelist;
 vector<int> oplist;
 
-struct playerdata {
-	string name;
-	string pawn;
-	int BankBalance;
-	int position;
-	bool NPC;
-};
+
 
 int hmfloop(vector<int> w) { // for loop for vectors to print out the guess or current or ans 
 	cout << "Current: ";
