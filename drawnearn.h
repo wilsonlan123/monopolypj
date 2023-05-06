@@ -3,6 +3,7 @@
 #include<vector>
 #include<random>
 #include<map>
+#include <algorithm>
 #include<string>
 #include <cstdlib>
 #include <ctime>
