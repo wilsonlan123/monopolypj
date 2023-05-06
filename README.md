@@ -30,7 +30,7 @@ When you land on a minigame space, you will start to play a random mini game.
 You will be rewarded certain amount of money if you win the game, or lose an amount of money if you lose the game.
 More information about the minigames will be explained in the following sections.
 
-### Dice Rolling Game
+### 1. Dice Rolling Game
 
 Player will play against a bot.
 In this game, both players take turn make a correct guess within 4 randomly-generated dice.
@@ -39,7 +39,7 @@ Notice there are two <3> in the dice. Hence, he can eliminate 2 dice.
 He still has 2 more dice to guess.
 Player with 0 dice left will win the game
 
-### OneInAHundred Game
+### 2. OneInAHundred Game
 
 In this game, player will play against a bot.
 Both player and the bot are going to keep guessing a number until either of them guess the correct GOLDEN NUMBER.
