@@ -182,7 +182,7 @@ int bhangman() { // hangman for bot
 }
 
 
-int hangman(int size, playerdata c[4]) {
+vector<int> hangman(int size, playerdata c[4]) {
 	vector<int> rank;
 	vector<int> chancelist;
 	vector<int> oplist;
