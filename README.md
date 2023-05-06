@@ -9,7 +9,7 @@
 ## Team Member 5: Yeo Kiah Huah
 
 
-# Game Decription and Game Rules (Problem statement)
+# Game Description and Game Rules (Problem statement)
 This is a multiplayer monopoly game. 
 In this game, you can play with different friends.
 Each player starts the game with $1500M.
