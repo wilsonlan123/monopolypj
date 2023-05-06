@@ -16,4 +16,4 @@ int hmfloop(vector<int> w);
 
 
 
-vector<int> drawnearn(int size;
+vector<int> drawnearn(int size);
