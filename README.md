@@ -1,15 +1,17 @@
 # MonoPoly 
 
+
+#Identification of Team Members:
+Team Member 1: Chan Ka Ho
+Team Member 2: Coggins Oscar Louis
+Team Member 3: Wang Man Kit
+Team Member 4: Lan Lik Wai
+Team Member 5: Yeo Kiah Huah
+
+
+# Game Decription and Game Rules
 This is a multiplayer monopoly game. 
 In this game, you can play with different friends.
-There are multiple minigames within the monopoly. When you step on the correspoding grid, you will have to strive for the game! 
-ENJOY and HAVE FUN!
-
-# Object of the Game
-Become the wealthiest player through buying, renting and selling of property and force other players into bankruptcy.
-
-
-# GamePlayRules
 Each player starts the game with $1500m.
 Each player places his token on the corner marked "GO", and throw the dice and move his the number of spaces indicated by the dice.
 The tokens remain on the spaces occupied and proceed from that point on the player's next turn.
@@ -31,7 +33,6 @@ You will be rewarded certain amount of money if you win the game, or lose an amo
 More information about the minigames will be explained in the following sections.
 
 ### 1. Dice Rolling Game
-
 Player will play against a bot.
 In this game, both players take turn make a correct guess within 4 randomly-generated dice.
 For example, Player 1 has 4 dice, he takes a guess of 3, fortunately, dice are [3,4,2,3] after the round.
@@ -40,23 +41,29 @@ He still has 2 more dice to guess.
 Player with 0 dice left will win the game
 
 ### 2. OneInAHundred Game
-
 In this game, player will play against a bot.
 Both player and the bot are going to keep guessing a number until either of them guess the correct GOLDEN NUMBER.
 They will be given the range of the number before every guess, and the range will become smaller each time a guess is made.
 Winner will be rewarded 500m!
 Loser will be penalized 500m from his balance!
 
-
 ## Bankruptcy
 You are declared bankrupt if you owe more than you can pay to another player or to the Bank.
 If your debt is to another player, you must turn over all that you have to that player.
 If you own houses or hotels, you must return these to the Bank in exchange for money to the extent of one-half the amount paid for them and this cash is given to the creditor.
 
-
 ## End of the Game
 Bankrupt players must retire from the game.
 Players can opt to terminate the game after each round.
 The player with the highest bank balance will become the winner.
+
+# Features
+...
+
+# Non-standard libraries
+There are no non-standard libraries used in the program.
+
+# Compilation and Execution Instruction
+Run "make main" to compile and run the game.
 
 
