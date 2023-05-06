@@ -9,7 +9,7 @@
 ## Team Member 5: Yeo Kiah Huah
 
 
-# Game Decription and Game Rules
+# Game Decription and Game Rules (Problem statement)
 This is a multiplayer monopoly game. 
 In this game, you can play with different friends.
 Each player starts the game with $1500m.
@@ -18,7 +18,6 @@ The tokens remain on the spaces occupied and proceed from that point on the play
 Two or more tokens may rest on the same space at the same time.
 Depending on the space the token reaches, you may buy the property, or be obliged to pay rent, pay taxes or etc...
 
-# Problem statement
 The game can be played with at most 4 players. After running the game code, some questions will pompt up.
 By answering the questions, you can set players to either real person or NPC.
 You can play with other people or play against computers if you want.
