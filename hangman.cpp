@@ -9,7 +9,6 @@
 
 using namespace std;
 vector<string> hmwordbank{ "INDEX", "MOUSE", "FALSE", "ABORT", "LINES","CLOSE","INPUT", "FLASH", "IMAGE", "BEGIN", "STACK", "LOGIC","CYBER","FIELD","QUERY" };
-map<string, int>hmplayer_scoremap;
 
 int chances = 8; // maybe we can lower it 
 vector<char> hmdisplay{ '_','_','_','_','_' };//list of display 
@@ -179,24 +178,24 @@ int bhangman() { // hangman for bot
 vector<int> hangman(int size) {
 	vector<int> rank;
 	vector<int> chancelist;
-	vector<int> oplist;
+	vector<int> hmoplist;
 	srand(time(nullptr));
 	cout << "Wordle time! " << endl;
 	cout << "You have to guess a five letters word. \nEvery chances you left unused will be converted to a hundred! " << endl;
 	for (int i = 0; i < size; i++) {
 		cout << "-----------------------------------------------------------------------------------------" << endl;
 		cout << "Player "<< i << "'s turn! " << endl;
-		cout << "Is player " << i+1 << " NPC?(y/n) " << endl;
+		cout << "Is player " << i << "NPC?(y/n) " << endl;
 		string npc;
 		cin >> npc;
 		if (npc == "y") {
 			int temp = bhangman();
 			chancelist.push_back(temp);
-			oplist.push_back(temp);		
+			hmoplist.push_back(temp);
 		}else {
 			int temp = phangman();
 			chancelist.push_back(temp);
-			oplist.push_back(temp);		
+			hmoplist.push_back(temp);		
 		}
 		if (hmwin == true) {
 			cout << "Player "<< i << " wins with " << chances << " chances left! " << endl;
@@ -211,9 +210,9 @@ vector<int> hangman(int size) {
 	//	cout << "|" << Character[i].name << "   |  " << Character[i].BankBalance << " |" << endl;
 	//}
 	//cout << "----------------" << endl;
-	for (int i = 0; i < oplist.size(); i++) {
+	for (int i = 0; i < hmoplist.size(); i++) {
 	for (int j = 0; j < chancelist.size(); j++) {
-		if (chancelist[j] == oplist[i]) {
+		if (chancelist[j] == hmoplist[i]) {
 			rank.push_back(j);
 			}
 		}
