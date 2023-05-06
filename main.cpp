@@ -238,15 +238,13 @@ void minigame(int PlayerNum){
 		Character[PlayerNum].BankBalance += 500;}
 	else{
 		Character[PlayerNum].BankBalance -= 500;}	
-    }else if (choice == 5){
-	//implement boxinggame.cpp
     }else if (choice == 3){
 	//implement drawnearn.cpp
 	 // just call and bring in the size
 	  // return the ranking list where 0 is First place , 1 is second place.etc
 	vector<int> drawnearnranklist = drawnearn(4);
 	for (int i=0; i<4;i++){
-	    	Character[i].BankBalance += (4-drawnearnranklist[i])/10.0 * MoneyPool;
+	    	Character[i].BankBalance += (4-drawnearnranklist[i])/10.0 * prizepool;
 	    }
     } else if (choice == 5){
     	//implement hangman.cpp
