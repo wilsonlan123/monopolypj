@@ -14,5 +14,3 @@ main: DiceRolling.o OneInAHundred.o hangman.o drawnearn.o main.o
 clean: 
 	rm -f main main.o OneInAHundred.o DiceRolling.o hangman.o drawnearn.o
 .PHONY: clean 
-
-//please append codes for other minigames 
