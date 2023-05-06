@@ -65,6 +65,8 @@ char toUppercase(char a) { // change a char into
 	if (a >= 'A' && a <= 'Z') {
 		return a;
 	}
+	else{
+		return ' ';}
 }
 
 bool hmcheck() {
