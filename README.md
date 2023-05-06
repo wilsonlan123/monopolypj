@@ -60,7 +60,7 @@ The player with the highest bank balance will become the winner.
 # Features
 1. Generation of random game sets or events -> rolling dice by generating a random number between 1-6 and generate a random number to decide which minigame players will play when they lend on minigame boxes
 2. Program codes in multiple files -> codes of the monopoly and minigames are seperated to multiple files
-
+3. Proper indentation and naming styles -> codes are indented properly and names of the function is easy to understand e.g. Rolladice, printBoard, printBalance
 
 
 # Non-standard libraries
