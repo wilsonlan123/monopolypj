@@ -256,9 +256,7 @@ void minigame(int PlayerNum){
     	for (int i=0; i<4;i++){
 		Character[i].BankBalance += ((4-hangmanchancelist[i]))/10.0 * 50;
 	}//implement hangman.cpp
-    } else if (choice == 8){
-    	//implement tictactoe.cpp
-    }
+    } 
 }
 
 //what it does: regular character turnsequence, roll dice, line on square, buy property/pay rent/play mini game etc
