@@ -244,7 +244,7 @@ void minigame(int PlayerNum){
 	  // return the ranking list where 0 is First place , 1 is second place.etc
 	vector<int> drawnearnranklist = drawnearn(4);
 	for (int i=0; i<4;i++){
-	    	Character[i].BankBalance += (4-drawnearnranklist[i])/10.0 * prizepool;
+	    	Character[i].BankBalance += (4-drawnearnranklist[i])/10.0 * 60;
 	    }
     } else if (choice == 5){
     	//implement hangman.cpp
