@@ -31,6 +31,7 @@ You will be rewarded certain amount of money if you win the game, or lose an amo
 More information about the minigames will be explained in the following sections.
 
 1. Dice Rolling Game
+
 Player will play against a bot.
 In this game, both players take turn make a correct guess within 4 randomly-generated dice.
 For example, Player 1 has 4 dice, he takes a guess of 3, fortunately, dice are [3,4,2,3] after the round.
@@ -39,6 +40,7 @@ He still has 2 more dice to guess.
 Player with 0 dice left will win the game
 
 2.OneInAHundred Game
+
 In this game, player will play against a bot.
 Both player and the bot are going to keep guessing a number until either of them guess the correct GOLDEN NUMBER.
 They will be given the range of the number before every guess, and the range will become smaller each time a guess is made.
