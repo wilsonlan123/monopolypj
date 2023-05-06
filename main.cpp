@@ -226,7 +226,7 @@ void minigame(int PlayerNum){
 			//function ranking[1] + 0.25 * prize pool
     int prizepool;
     srand(time(0));
-    int choice = rand() % 8 + 1;
+    int choice = rand() % 4 + 1;
 	
     if (choice == 1){
 	if (dice_rolling(Character[PlayerNum].name,"Bot1")){
@@ -238,9 +238,9 @@ void minigame(int PlayerNum){
 		Character[PlayerNum].BankBalance += 500;}
 	else{
 		Character[PlayerNum].BankBalance -= 500;}	
-    }else if (choice == 3){
+    }else if (choice == 5){
 	//implement boxinggame.cpp
-    }else if (choice == 4){
+    }else if (choice == 3){
 	//implement drawnearn.cpp
 	 // just call and bring in the size
 	  // return the ranking list where 0 is First place , 1 is second place.etc
@@ -252,7 +252,7 @@ void minigame(int PlayerNum){
     	//implement hangman.cpp
     } else if (choice == 6){
     	//implement moneyswapfunction.cpp
-    } else if (choice == 7){
+    } else if (choice == 4){
 	    //call hangman game and brings in the number of players which is used to initiate the for loop
 	    //return the array of chances left each player
 	    // each player earn for $50 per chance
