@@ -256,7 +256,7 @@ void minigame(int PlayerNum){
 	    //call hangman game and brings in the number of players which is used to initiate the for loop
 	    //return the array of chances left each player
 	    // each player earn for $50 per chance
-    	vector<int> hangmanchancelist = hangman(4,Character);
+    	vector<int> hangmanchancelist = hangman(4);
     	for (int i=0; i<4;i++){
 		Character[i].BankBalance += ((4-hangmanchancelist[i]))/10.0 * 50;
     	//implement hangman.cpp
