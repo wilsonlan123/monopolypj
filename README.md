@@ -84,6 +84,7 @@ The player with the highest bank balance will become the winner.
 There are no non-standard libraries used in the program.
 
 # Compilation and Execution Instruction
-Run "make main" to compile and run the game.
+Run "make main" to compile the file.
+Run "./main" to start the game.
 
 
