@@ -1,12 +1,12 @@
 # MonoPoly 
 
 
-#Identification of Team Members:
-Team Member 1: Chan Ka Ho
-Team Member 2: Coggins Oscar Louis
-Team Member 3: Wang Man Kit
-Team Member 4: Lan Lik Wai
-Team Member 5: Yeo Kiah Huah
+# Identification of Team Members:
+Team Member 1: Chan Ka Ho\n
+Team Member 2: Coggins Oscar Louis\n
+Team Member 3: Wang Man Kit\n
+Team Member 4: Lan Lik Wai\n
+Team Member 5: Yeo Kiah Huah\n
 
 
 # Game Decription and Game Rules
