@@ -63,8 +63,7 @@ The player with the highest bank balance will become the winner.
 3. Proper indentation and naming styles -> codes are indented properly and names of the function is easy to understand e.g. Rolladice, PrintBoard, PrintBalance, bankrupt, etc.
 4. In-code documentation -> there are comments in the code introducing the functions to increase the readability
 5. Data structures for storing game status -> data of the player is stored in a global struct variable that helps managing
-6. Dynamic memory management
-7. File input/output
+6. Dynamic memory management -> 
 
 # Non-standard libraries
 There are no non-standard libraries used in the program.
