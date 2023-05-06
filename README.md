@@ -51,6 +51,17 @@ They will be given the range of the number before every guess, and the range wil
 Winner will be rewarded 500m!
 Loser will be penalized 500m from his balance!
 
+### 3. Hangman Game 
+In this game, each player will take turns to guess a five-letter word which is related to programming.
+After guessing a letter, the program will tell whether the guess is correct. 
+If the guess is incorrect, one chance will be deducted.
+They will have eight chances in total. The more chances left when they win, the more they can earn.
+
+## 4. DrawnEarn Game 
+In this game, each player will draw a random number ranged from 1-500. 
+Players will be ranked according to their numbers.
+The higher rank, the more they will get!
+
 ## Bankruptcy
 You are declared bankrupt if you owe more than you can pay to another player or to the Bank.
 If your debt is to another player, you must turn over all that you have to that player.
