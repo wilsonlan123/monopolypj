@@ -11,7 +11,6 @@
 #include "OneInAHundred.h"
 #include "drawnearn.h"
 #include "hangman.h"
-#include "moneyswapfunction.h"
 using namespace std;
 
 //data structure for storing information on each square of the board
