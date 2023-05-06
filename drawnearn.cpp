@@ -8,8 +8,8 @@
 #include <ctime>
 using namespace std;
 
-vector<int> scorelist;
-vector<int> oplist;
+vector<int> drawnearnscorelist;
+vector<int> drawnearnoplist;
 
 
 
@@ -29,8 +29,8 @@ void dgdrawnum() {
 
 	int score = dgnumbank[dgrandom];
 	cout << "The drawn number is " << dgnumbank[dgrandom] << endl;
-	scorelist.push_back(score);
-	oplist.push_back(score);
+	drawnearnscorelist.push_back(score);
+	drawnearnoplist.push_back(score);
 }
 
 
@@ -51,11 +51,11 @@ vector<int> drawnearn(int size) {
 		dgdrawnum();
 		
 	}
-	sort(oplist.begin(), oplist.end(),greater<>());
+	sort(drawnearnoplist.begin(), drawnearnoplist.end(),greater<>());
 	
-	for (int i = 0; i < oplist.size(); i++) {
-		for (int j = 0; j < scorelist.size(); j++) {
-			if (scorelist[j] == oplist[i]) {
+	for (int i = 0; i < drawnearnoplist.size(); i++) {
+		for (int j = 0; j < drawnearnscorelist.size(); j++) {
+			if (drawnearnscorelist[j] == drawnearnoplist[i]) {
 				rank.push_back(j);
 			}
 		}
