@@ -58,7 +58,8 @@ Players can opt to terminate the game after each round.
 The player with the highest bank balance will become the winner.
 
 # Features
-...
+Generation of random game sets or events -> rolling dice by generating a random number between 1-6
+
 
 # Non-standard libraries
 There are no non-standard libraries used in the program.
