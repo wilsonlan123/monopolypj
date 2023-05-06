@@ -1,4 +1,4 @@
-# monopolypj
+# MonoPoly 
 
 This is a multiplayer monopoly game. 
 In this game, you can play with different friends.
