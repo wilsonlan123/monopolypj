@@ -9,7 +9,7 @@
 #include <limits>
 #include "DiceRolling.h"
 #include "OneInAHundred.h"
-#include "drawnman.h"
+#include "drawnearn.h"
 #include "hangman.h"
 using namespace std;
 
