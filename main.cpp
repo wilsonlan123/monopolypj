@@ -7,6 +7,8 @@
 #include <chrono>
 #include <thread>
 #include <limits>
+#include "DiceRolling.h"
+#include "OneInAHundred.h"
 using namespace std;
 
 //data structure for storing information on each square of the board
