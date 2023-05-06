@@ -5,7 +5,7 @@ In this game, you can play with different friends.
 There are multiple minigames within the monopoly. When you step on the correspoding grid, you will have to strive for the game! 
 ENJOY and HAVE FUN!
 
-#Object of the Game
+# Object of the Game
 Become the wealthiest player through buying, renting and selling of property and force other players into bankruptcy.
 
 
