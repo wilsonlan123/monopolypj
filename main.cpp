@@ -1,17 +1,4 @@
-#include <iostream>
-#include <cctype>
-#include <string>
-#include <map>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <thread>
-#include <limits>
-#include "DiceRolling.h"
-#include "OneInAHundred.h"
-#include "drawnearn.h"
-#include "hangman.h"
-using namespace std;
+
 
 //data structure for storing information on each square of the board
 struct square{
