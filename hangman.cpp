@@ -182,7 +182,7 @@ int bhangman() { // hangman for bot
 }
 
 
-vector<int> hangman(int size, playerdata c[4]) {
+vector<int> hangman(int size) {
 	vector<int> rank;
 	vector<int> chancelist;
 	vector<int> oplist;
@@ -192,7 +192,10 @@ vector<int> hangman(int size, playerdata c[4]) {
 	for (int i = 0; i < size; i++) {
 		cout << "-----------------------------------------------------------------------------------------" << endl;
 		cout << "Player "<< i << "'s turn! " << endl;
-		if (c[i].NPC == true) {
+		cout << "Is player " << i << "NPC?(y/n) " << endl;
+		string npc;
+		cin >> npc;
+		if (npc == "y") {
 			int temp = bhangman();
 			chancelist.push_back(temp);
 			oplist.push_back(temp);		
